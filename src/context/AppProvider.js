@@ -1,11 +1,14 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import PropTypes from 'prop-types';
 import { useState, useMemo, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import AppContext from './AppContext';
 import useHandleChange from '../hooks/useHandleChange';
 
 function AppProvider({ children }) {
   const email = useHandleChange('');
   const password = useHandleChange('');
+  const history = useHistory();
 
   const [disabled, setDisabled] = useState(true);
 
@@ -20,16 +23,24 @@ function AppProvider({ children }) {
     }
   };
 
+  const handleSubmit = () => {
+    const user = {
+      email: email.value,
+    };
+    localStorage.setItem('user', JSON.stringify(user));
+    history.push('/meals');
+  };
+
   useEffect(() => {
     validationError();
   }, [email, password]);
 
   const values = useMemo(
     () => ({
-      email, password, disabled,
+      email, password, disabled, handleSubmit,
     }),
     [
-      email, password, disabled,
+      email, password, disabled, handleSubmit,
     ],
   );
 
