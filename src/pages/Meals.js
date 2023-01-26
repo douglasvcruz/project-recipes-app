@@ -1,15 +1,19 @@
 import React from 'react';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import Recipes from '../components/Recipes';
 
-export default function Meals() {
+function Meals() {
   return (
     <div>
       <Header
         title="Meals"
         haveSearch
       />
+      <Recipes />
       <Footer />
     </div>
   );
 }
+
+export default Meals;
