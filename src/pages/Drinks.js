@@ -1,4 +1,5 @@
 import React from 'react';
+import Footer from '../components/Footer';
 import Header from '../components/Header';
 
 export default function Drinks() {
@@ -8,6 +9,7 @@ export default function Drinks() {
         title="Drinks"
         haveSearch
       />
+      <Footer />
     </div>
   );
 }
