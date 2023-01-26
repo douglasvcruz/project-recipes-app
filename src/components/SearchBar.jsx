@@ -1,10 +1,17 @@
 import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import AppContext from '../context/AppContext';
 
-export default function SearchBar() {
-  const { ingredients, ingredient, searchHandleChange, fetchApi,
+function SearchBar() {
+  const {
+    ingredients,
+    searchHandleChange,
+    fetchMeals,
+    fetchDrinks,
   } = useContext(AppContext);
-  console.log(ingredient.meals);
+
+  const { location: { pathname } } = useHistory();
+
   return (
     <div>
       <input
@@ -55,10 +62,12 @@ export default function SearchBar() {
       <br />
       <button
         data-testid="exec-search-btn"
-        onClick={ fetchApi }
+        onClick={ pathname === '/meals' ? fetchMeals : fetchDrinks }
       >
         Search
       </button>
     </div>
   );
 }
+
+export default SearchBar;

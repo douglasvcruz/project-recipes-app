@@ -12,9 +12,11 @@ function AppProvider({ children }) {
   const history = useHistory();
   const ingredients = useHandleChange('');
   const [disabled, setDisabled] = useState(true);
-  const [ingredient, setIngredient] = useState('');
+  const [drinks, setDrinks] = useState('');
+  const [meals, setMeals] = useState('');
   const searchHandleChange = useHandleChange('');
   const { makeFetch } = useFetch();
+  const twelve = 12;
 
   const validationError = () => {
     const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
@@ -26,7 +28,8 @@ function AppProvider({ children }) {
       setDisabled(true);
     }
   };
-  const fetchApi = async () => {
+
+  const fetchMeals = async () => {
     let url = '';
     if (ingredients.value === 'ingredient') {
       url = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${searchHandleChange.value}`;
@@ -39,7 +42,39 @@ function AppProvider({ children }) {
       }
     }
     const api = await makeFetch(url);
-    setIngredient(api);
+    if (api.meals === null) {
+      global.alert('Sorry, we haven\'t found any recipes for these filters.');
+    } else {
+      if (api.meals.length === 1) {
+        history.push(`/meals/${api.meals[0].idMeal}`);
+      }
+      setMeals(api.meals.slice(0, twelve));
+      searchHandleChange.setValue('');
+    }
+  };
+
+  const fetchDrinks = async () => {
+    let url = '';
+    if (ingredients.value === 'ingredient') {
+      url = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${searchHandleChange.value}`;
+    } else if (ingredients.value === 'name') {
+      url = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${searchHandleChange.value}`;
+    } else {
+      url = `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${searchHandleChange.value}`;
+      if (searchHandleChange.value.length > 1) {
+        global.alert('Your search must have only 1 (one) character');
+      }
+    }
+    const api = await makeFetch(url);
+    if (api.drinks === null) {
+      global.alert('Sorry, we haven\'t found any recipes for these filters.');
+    } else {
+      if (api.drinks.length === 1) {
+        history.push(`/drinks/${api.drinks[0].idDrink}`);
+      }
+      setDrinks(api.drinks.slice(0, twelve));
+      searchHandleChange.setValue('');
+    }
   };
 
   const handleSubmit = () => {
@@ -54,15 +89,6 @@ function AppProvider({ children }) {
     validationError();
   }, [email, password]);
 
-  // useEffect(() => {
-  //   const urlName = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredients.value}`;
-  //   const getByName = async () => {
-  //     const ApiNameRecipe = await makeFetch(urlName);
-  //     setIngredient(ApiNameRecipe);
-  //   };
-  //   getByName();
-  // }, [ingredients]);
-
   const values = useMemo(
     () => ({
       email,
@@ -70,9 +96,11 @@ function AppProvider({ children }) {
       disabled,
       handleSubmit,
       ingredients,
-      ingredient,
+      drinks,
+      meals,
       searchHandleChange,
-      fetchApi,
+      fetchMeals,
+      fetchDrinks,
     }),
     [
       email,
@@ -80,9 +108,11 @@ function AppProvider({ children }) {
       disabled,
       handleSubmit,
       ingredients,
-      ingredient,
+      drinks,
+      meals,
       searchHandleChange,
-      fetchApi,
+      fetchMeals,
+      fetchDrinks,
     ],
   );
 
