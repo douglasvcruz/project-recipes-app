@@ -16,6 +16,8 @@ function AppProvider({ children }) {
   const [meals, setMeals] = useState('');
   const searchHandleChange = useHandleChange('');
   const { makeFetch } = useFetch();
+  const [categoryDrinks, setCategoryDrinks] = useState([]);
+  const [categoryMeals, setCategoryMeals] = useState([]);
   const twelve = 12;
 
   const validationError = () => {
@@ -78,33 +80,31 @@ function AppProvider({ children }) {
   };
 
   const handleSubmit = async () => {
-    // const url = {
-    //   meals: 'https://www.themealdb.com/api/json/v1/1/search.php?s=',
-    //   drinks: 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=',
-    // };
     const user = {
       email: email.value,
     };
     localStorage.setItem('user', JSON.stringify(user));
     history.push('/meals');
-    // const apiMeals = await makeFetch(url.meals);
-    // const apiDrinks = await makeFetch(url.drinks);
-
-    // setMeals(apiMeals.meals.slice(0, twelve));
-    // setDrinks(apiDrinks.drinks.slice(0, twelve));
   };
 
   const fetchApis = async () => {
     const url = {
       meals: 'https://www.themealdb.com/api/json/v1/1/search.php?s=',
       drinks: 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=',
+      categoryMeals: 'https://www.themealdb.com/api/json/v1/1/list.php?c=list',
+      categoryDrinks: 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list',
     };
+    const five = 5;
 
     const apiMeals = await makeFetch(url.meals);
     const apiDrinks = await makeFetch(url.drinks);
+    const apiCategoryMeals = await makeFetch(url.categoryMeals);
+    const apiCategoryDrinks = await makeFetch(url.categoryDrinks);
 
     setMeals(apiMeals.meals.slice(0, twelve));
     setDrinks(apiDrinks.drinks.slice(0, twelve));
+    setCategoryMeals(apiCategoryMeals.meals.slice(0, five));
+    setCategoryDrinks(apiCategoryDrinks.drinks.slice(0, five));
   };
 
   useEffect(() => {
@@ -127,6 +127,8 @@ function AppProvider({ children }) {
       searchHandleChange,
       fetchMeals,
       fetchDrinks,
+      categoryMeals,
+      categoryDrinks,
     }),
     [
       email,
