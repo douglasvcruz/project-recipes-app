@@ -77,17 +77,43 @@ function AppProvider({ children }) {
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    // const url = {
+    //   meals: 'https://www.themealdb.com/api/json/v1/1/search.php?s=',
+    //   drinks: 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=',
+    // };
     const user = {
       email: email.value,
     };
     localStorage.setItem('user', JSON.stringify(user));
     history.push('/meals');
+    // const apiMeals = await makeFetch(url.meals);
+    // const apiDrinks = await makeFetch(url.drinks);
+
+    // setMeals(apiMeals.meals.slice(0, twelve));
+    // setDrinks(apiDrinks.drinks.slice(0, twelve));
+  };
+
+  const fetchApis = async () => {
+    const url = {
+      meals: 'https://www.themealdb.com/api/json/v1/1/search.php?s=',
+      drinks: 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=',
+    };
+
+    const apiMeals = await makeFetch(url.meals);
+    const apiDrinks = await makeFetch(url.drinks);
+
+    setMeals(apiMeals.meals.slice(0, twelve));
+    setDrinks(apiDrinks.drinks.slice(0, twelve));
   };
 
   useEffect(() => {
     validationError();
   }, [email, password]);
+
+  useEffect(() => {
+    fetchApis();
+  }, []);
 
   const values = useMemo(
     () => ({
