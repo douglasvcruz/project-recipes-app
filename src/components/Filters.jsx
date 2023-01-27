@@ -1,33 +1,47 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import AppContext from '../context/AppContext';
+import FilterContext from '../context/FilterContext';
 
-export default function Filters() {
-  const { categoryDrinks, categoryMeals } = useContext(AppContext);
+function Filters() {
+  const { handleApi, categoryDrinks, categoryMeals } = useContext(FilterContext);
   const { location: { pathname } } = useHistory();
 
   return (
     <div>
       { pathname === '/meals' ? (
         <section>
+          <button
+            type="button"
+            data-testid="All-category-filter"
+            onClick={ ({ target }) => handleApi(target.innerHTML) }
+          >
+            All
+          </button>
           {categoryMeals.map(({ strCategory }) => (
             <button
               type="button"
               key={ strCategory }
               data-testid={ `${strCategory}-category-filter` }
-              onClick={ () => {} }
+              onClick={ () => handleApi(strCategory) }
             >
               { strCategory }
             </button>))}
         </section>
       ) : (
         <section>
+          <button
+            type="button"
+            data-testid="All-category-filter"
+            onClick={ ({ target }) => handleApi(target.innerHTML) }
+          >
+            All
+          </button>
           {categoryDrinks.map(({ strCategory }) => (
             <button
               type="button"
               key={ strCategory }
               data-testid={ `${strCategory}-category-filter` }
-              onClick={ () => {} }
+              onClick={ () => handleApi(strCategory) }
             >
               { strCategory }
             </button>))}
@@ -36,3 +50,5 @@ export default function Filters() {
     </div>
   );
 }
+
+export default Filters;

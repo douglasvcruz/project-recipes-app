@@ -4,7 +4,7 @@ import AppContext from '../context/AppContext';
 
 function Recipes() {
   const { location: { pathname } } = useHistory();
-  const { drinks, meals } = useContext(AppContext);
+  const { drinks, meals, redirectRecipe } = useContext(AppContext);
   return (
     <div>
       { pathname === '/drinks'
@@ -12,14 +12,20 @@ function Recipes() {
           <section>
             { drinks.length !== 0 && drinks
               .map(({ strDrinkThumb, strDrink, idDrink }, i) => (
-                <div key={ idDrink } data-testid={ `${i}-recipe-card` }>
+                <button
+                  className="recipe-card"
+                  type="button"
+                  key={ idDrink }
+                  data-testid={ `${i}-recipe-card` }
+                  onClick={ () => redirectRecipe(idDrink) }
+                >
                   <p data-testid={ `${i}-card-name` }>{strDrink}</p>
                   <img
                     src={ strDrinkThumb }
                     alt="Imagem da receita"
                     data-testid={ `${i}-card-img` }
                   />
-                </div>
+                </button>
               ))}
           </section>
         )
@@ -27,14 +33,20 @@ function Recipes() {
           <section>
             { meals.length !== 0 && meals
               .map(({ strMealThumb, strMeal, idMeal }, i) => (
-                <div key={ idMeal } data-testid={ `${i}-recipe-card` }>
+                <button
+                  className="recipe-card"
+                  type="button"
+                  key={ idMeal }
+                  data-testid={ `${i}-recipe-card` }
+                  onClick={ () => redirectRecipe(idMeal) }
+                >
                   <p data-testid={ `${i}-card-name` }>{strMeal}</p>
                   <img
                     src={ strMealThumb }
                     alt="Imagem da receita"
                     data-testid={ `${i}-card-img` }
                   />
-                </div>
+                </button>
               ))}
           </section>
         )}
