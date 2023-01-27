@@ -9,6 +9,7 @@ import FavoriteRecipes from './pages/FavoriteRecipes';
 import './App.css';
 import AppProvider from './context/AppProvider';
 import FilterProvider from './context/FilterProvider';
+import RecipeDetails from './pages/RecipeDetails';
 
 function App() {
   return (
@@ -21,6 +22,8 @@ function App() {
           <Route exact path="/profile" component={ Profile } />
           <Route exact path="/done-recipes" component={ DoneRecipes } />
           <Route exact path="/favorite-recipes" component={ FavoriteRecipes } />
+          <Route path="/meals/:id" component={ RecipeDetails } />
+          <Route path="/drinks/:id" component={ RecipeDetails } />
         </Switch>
       </FilterProvider>
     </AppProvider>

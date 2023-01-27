@@ -8,13 +8,16 @@ import FilterContext from './FilterContext';
 function FilterProvider({ children }) {
   const { setDrinks, setMeals, makeFetch } = useContext(AppContext);
   const twelve = 12;
-
+  // const props = useParams();
+  // console.log(props);
   const history = useHistory();
   const { location: { pathname } } = history;
 
   const [toggle, setToggle] = useState('');
   const [categoryDrinks, setCategoryDrinks] = useState([]);
   const [categoryMeals, setCategoryMeals] = useState([]);
+  // const [apiDetails, setApiDetails] = useState([]);
+  // const [idState, setIdState] = useState('');
 
   const fetchApis = async () => {
     const url = {
@@ -66,11 +69,13 @@ function FilterProvider({ children }) {
       handleApi,
       categoryMeals,
       categoryDrinks,
+
     }),
     [
       handleApi,
       categoryMeals,
       categoryDrinks,
+
     ],
   );
   return (
@@ -79,6 +84,10 @@ function FilterProvider({ children }) {
     </FilterContext.Provider>
   );
 }
+
+// FilterProvider.propTypes = {
+//   children: PropTypes.any,
+// };
 
 FilterProvider.propTypes = {
   children: PropTypes.node.isRequired,
