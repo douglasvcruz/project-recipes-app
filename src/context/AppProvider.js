@@ -17,7 +17,6 @@ function AppProvider({ children }) {
   const searchHandleChange = useHandleChange('');
   const { makeFetch } = useFetch();
   const twelve = 12;
-  const { location: { pathname } } = history;
 
   const validationError = () => {
     const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
@@ -86,14 +85,6 @@ function AppProvider({ children }) {
     history.push('/meals');
   };
 
-  const redirectRecipe = (e) => {
-    if (pathname === '/meals') {
-      history.push(`/meals/${e}`);
-    } else {
-      history.push(`/drinks/${e}`);
-    }
-  };
-
   useEffect(() => {
     validationError();
   }, [email, password]);
@@ -113,7 +104,6 @@ function AppProvider({ children }) {
       setDrinks,
       setMeals,
       makeFetch,
-      redirectRecipe,
     }),
     [
       email,
@@ -129,7 +119,6 @@ function AppProvider({ children }) {
       setDrinks,
       setMeals,
       makeFetch,
-      redirectRecipe,
     ],
   );
 

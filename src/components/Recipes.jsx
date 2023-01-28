@@ -3,8 +3,9 @@ import { useHistory } from 'react-router-dom';
 import AppContext from '../context/AppContext';
 
 function Recipes() {
-  const { location: { pathname } } = useHistory();
-  const { drinks, meals, redirectRecipe } = useContext(AppContext);
+  const history = useHistory();
+  const { location: { pathname } } = history;
+  const { drinks, meals } = useContext(AppContext);
   return (
     <div>
       { pathname === '/drinks'
@@ -17,7 +18,7 @@ function Recipes() {
                   type="button"
                   key={ idDrink }
                   data-testid={ `${i}-recipe-card` }
-                  onClick={ () => redirectRecipe(idDrink) }
+                  onClick={ () => history.push(`/drinks/${idDrink}`) }
                 >
                   <p data-testid={ `${i}-card-name` }>{strDrink}</p>
                   <img
@@ -38,7 +39,7 @@ function Recipes() {
                   type="button"
                   key={ idMeal }
                   data-testid={ `${i}-recipe-card` }
-                  onClick={ () => redirectRecipe(idMeal) }
+                  onClick={ () => history.push(`/meals/${idMeal}`) }
                 >
                   <p data-testid={ `${i}-card-name` }>{strMeal}</p>
                   <img

@@ -10,6 +10,7 @@ import './App.css';
 import AppProvider from './context/AppProvider';
 import FilterProvider from './context/FilterProvider';
 import RecipeDetails from './pages/RecipeDetails';
+import RecipeInProgress from './pages/RecipeInProgress';
 
 function App() {
   return (
@@ -22,8 +23,18 @@ function App() {
           <Route exact path="/profile" component={ Profile } />
           <Route exact path="/done-recipes" component={ DoneRecipes } />
           <Route exact path="/favorite-recipes" component={ FavoriteRecipes } />
-          <Route path="/meals/:id" component={ RecipeDetails } />
-          <Route path="/drinks/:id" component={ RecipeDetails } />
+          <Route
+            exact
+            path="/meals/:id-da-receita/in-progress"
+            component={ RecipeInProgress }
+          />
+          <Route
+            exact
+            path="/drinks/:id-da-receita/in-progress"
+            component={ RecipeInProgress }
+          />
+          <Route exact path="/meals/:id" component={ RecipeDetails } />
+          <Route exact path="/drinks/:id" component={ RecipeDetails } />
         </Switch>
       </FilterProvider>
     </AppProvider>

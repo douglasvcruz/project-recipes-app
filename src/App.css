@@ -1,3 +1,8 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 .meals {
   align-items: center;
   background: #0fa36b;
@@ -21,6 +26,29 @@ img {
 
 .recipe-card {
   width: 100%;
+}
+
+.carousel {
+  display: flex;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  width: 350;
+}
+
+.carousel-div {
+  flex-shrink: 0;
+  height: 175px;
+  margin-bottom: 50px;
+  width: 175px;
+}
+
+section {
+  text-align: center;
+}
+
+.button-start {
+  bottom: 0;
+  position: fixed;
 }
 
 /*
