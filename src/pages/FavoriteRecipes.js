@@ -3,31 +3,31 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import RecipeFavoriteCard from '../components/RecipeFavoriteCard';
 
-export default function FavoriteRecipes() {
+function FavoriteRecipes() {
   const [status, setStatus] = useState({ all: true });
-  const [favoriteList, setFavoriteList] = useState([]);
   const { drink, meal, all } = status;
+  const [favoriteList, setFavoriteList] = useState([]);
 
   useEffect(() => {
     const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
     setFavoriteList(favoriteRecipes);
   }, []);
 
-  const meals = favoriteList.filter((each) => each.type === 'meal');
-  const drinks = favoriteList.filter((each) => each.type === 'drink');
+  const meals = (favoriteList || []).filter((each) => each.type === 'meal');
+  const drinks = (favoriteList || []).filter((each) => each.type === 'drink');
+
+  console.log([[] || favoriteList]);
 
   return (
-    <>
+    <div>
       <Header
         title="Favorite Recipes"
-        haveSearch
       />
       <div>
         <button
           type="button"
           data-testid="filter-by-all-btn"
           onClick={ () => setStatus({ all: true }) }
-          // style={ { border: 'none', backgroundColor: 'inherit' } }
         >
           All
         </button>
@@ -35,7 +35,6 @@ export default function FavoriteRecipes() {
           type="button"
           data-testid="filter-by-meal-btn"
           onClick={ () => setStatus({ meal: true }) }
-          // style={ { border: 'none', backgroundColor: 'inherit' } }
         >
           Food
 
@@ -44,20 +43,20 @@ export default function FavoriteRecipes() {
           type="button"
           data-testid="filter-by-drink-btn"
           onClick={ () => setStatus({ drink: true }) }
-          // style={ { border: 'none', backgroundColor: 'inherit' } }
         >
           Drinks
 
         </button>
       </div>
       <div>
-        { all ? favoriteList
+        { all ? (favoriteList || [])
           .map((each, index) => (<RecipeFavoriteCard
             each={ each }
             key={ index }
             index={ index }
             favoriteList={ favoriteList }
             test={ each.type }
+            setFavoriteList={ setFavoriteList }
           />)) : ''}
 
         { meal ? meals
@@ -66,6 +65,7 @@ export default function FavoriteRecipes() {
             key={ index }
             index={ index }
             favoriteList={ favoriteList }
+            setFavoriteList={ setFavoriteList }
             test={ each.type }
           />)) : ''}
 
@@ -75,10 +75,13 @@ export default function FavoriteRecipes() {
             key={ index }
             index={ index }
             favoriteList={ favoriteList }
+            setFavoriteList={ setFavoriteList }
             test={ each.type }
           />)) : ''}
       </div>
       <Footer />
-    </>
+    </div>
   );
 }
+
+export default FavoriteRecipes;

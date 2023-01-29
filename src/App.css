@@ -15,6 +15,11 @@
   width: 100%;
 }
 
+.favorite-recipes {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .rocksGlass {
   animation: shake 1s infinite ease;
   max-height: 80vh;
@@ -24,8 +29,9 @@ img {
   width: 100%;
 }
 
-.recipe-card {
-  width: 100%;
+.favorite-div {
+  height: 100px;
+  width: 100px;
 }
 
 .carousel {
