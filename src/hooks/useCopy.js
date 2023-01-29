@@ -3,14 +3,14 @@ import { useState } from 'react';
 const copy = require('clipboard-copy');
 
 function useCopy() {
-  const [copie, setCopie] = useState('');
+  const [copied, setCopied] = useState('');
 
   const copyButton = (url) => {
-    copy(`http://localhost:3000/${url}`);
-    setCopie('Link copied!');
+    copy(`http://localhost:3000${url}`);
+    setCopied('Link copied!');
   };
 
-  return { copie, copyButton };
+  return { copied, copyButton };
 }
 
 export default useCopy;

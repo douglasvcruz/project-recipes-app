@@ -6,8 +6,7 @@ import AppContext from '../context/AppContext';
 import blackHeart from '../images/blackHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeart from '../images/whiteHeartIcon.svg';
-
-const copy = require('clipboard-copy');
+import useCopy from '../hooks/useCopy';
 
 function RecipeDetails({ match }) {
   const { makeFetch, drinks, meals } = useContext(AppContext);
@@ -15,6 +14,7 @@ function RecipeDetails({ match }) {
   const { location: { pathname } } = history;
   const [apiDetails, setApiDetails] = useState([]);
   const [toggle, setToggle] = useState(false);
+  const copia = useCopy();
   const six = 6;
 
   const { id } = useParams();
@@ -27,12 +27,6 @@ function RecipeDetails({ match }) {
     }
     const api = await makeFetch(url);
     setApiDetails(api);
-  };
-
-  const copyButton = () => {
-    copy(`http://localhost:3000${match.url}`);
-    const p = document.getElementById('p');
-    p.innerHTML = 'Link copied!';
   };
 
   const localFavorites = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
@@ -61,7 +55,7 @@ function RecipeDetails({ match }) {
   };
 
   const saveLocalStorageFavorites = () => {
-    if (localFavorites.length !== 0 && localFavorites.some((a) => a.id === id)) {
+    if (localFavorites.some((a) => a.id === id)) {
       localStorage.setItem('favoriteRecipes', JSON
         .stringify(localFavorites.filter((a) => a.id !== id)));
     } else if (pathname.includes('/meals')) {
@@ -97,7 +91,7 @@ function RecipeDetails({ match }) {
 
   return (
     <div>
-      <p id="p" />
+      <p>{copia.copied}</p>
       <button
         type="button"
         onClick={ saveLocalStorageFavorites }
@@ -113,7 +107,7 @@ function RecipeDetails({ match }) {
       <button
         type="button"
         data-testid="share-btn"
-        onClick={ copyButton }
+        onClick={ () => copia.copyButton(match.url) }
       >
         <img src={ shareIcon } alt="share icon" />
       </button>
