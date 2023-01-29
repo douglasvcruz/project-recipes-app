@@ -13,14 +13,15 @@ function FavoriteRecipes() {
     setFavoriteList(favoriteRecipes);
   }, []);
 
-  const meals = favoriteList.filter((each) => each.type === 'meal');
-  const drinks = favoriteList.filter((each) => each.type === 'drink');
+  const meals = favoriteList !== null
+   && favoriteList.filter((each) => each.type === 'meal');
+  const drinks = favoriteList !== null
+  && favoriteList.filter((each) => each.type === 'drink');
 
   return (
     <div>
       <Header
         title="Favorite Recipes"
-        haveSearch
       />
       <div>
         <button
@@ -47,8 +48,8 @@ function FavoriteRecipes() {
 
         </button>
       </div>
-      <div className="favorite-recipes">
-        { all ? favoriteList
+      <div>
+        { all ? favoriteList !== null && favoriteList
           .map((each, index) => (<RecipeFavoriteCard
             each={ each }
             key={ index }
