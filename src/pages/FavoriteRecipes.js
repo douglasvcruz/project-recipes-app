@@ -13,10 +13,10 @@ function FavoriteRecipes() {
     setFavoriteList(favoriteRecipes);
   }, []);
 
-  const meals = favoriteList !== null
-   && favoriteList.filter((each) => each.type === 'meal');
-  const drinks = favoriteList !== null
-  && favoriteList.filter((each) => each.type === 'drink');
+  const meals = (favoriteList || []).filter((each) => each.type === 'meal');
+  const drinks = (favoriteList || []).filter((each) => each.type === 'drink');
+
+  console.log([[] || favoriteList]);
 
   return (
     <div>
@@ -49,7 +49,7 @@ function FavoriteRecipes() {
         </button>
       </div>
       <div>
-        { all ? favoriteList !== null && favoriteList
+        { all ? (favoriteList || [])
           .map((each, index) => (<RecipeFavoriteCard
             each={ each }
             key={ index }
