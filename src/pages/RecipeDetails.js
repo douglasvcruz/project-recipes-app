@@ -59,7 +59,8 @@ function RecipeDetails({ match }) {
       localStorage.setItem('favoriteRecipes', JSON
         .stringify(localFavorites.filter((a) => a.id !== id)));
     } else if (pathname.includes('/meals')) {
-      const { idMeal, strMeal, strArea, strMealThumb, strCategory } = apiDetails.meals[0];
+      const { idMeal, strMeal, strArea,
+        strMealThumb, strCategory, strInstructions } = apiDetails.meals[0];
       localStorage.setItem('favoriteRecipes', JSON.stringify([...localFavorites, {
         id: idMeal,
         type: 'meal',
@@ -68,10 +69,11 @@ function RecipeDetails({ match }) {
         alcoholicOrNot: '',
         name: strMeal,
         image: strMealThumb,
+        strInstructions,
       }]));
     } else {
       const { idDrink, strDrink, strCategory,
-        strDrinkThumb, strAlcoholic } = apiDetails.drinks[0];
+        strDrinkThumb, strAlcoholic, strInstructions } = apiDetails.drinks[0];
       localStorage.setItem('favoriteRecipes', JSON.stringify([...localFavorites, {
         id: idDrink,
         type: 'drink',
@@ -80,6 +82,7 @@ function RecipeDetails({ match }) {
         alcoholicOrNot: strAlcoholic,
         name: strDrink,
         image: strDrinkThumb,
+        strInstructions,
       }]));
     }
     setToggle(!toggle);
