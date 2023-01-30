@@ -29,6 +29,10 @@ img {
   width: 100%;
 }
 
+.test {
+  text-decoration: line-through solid black;
+}
+
 .favorite-div {
   height: 100px;
   width: 100px;
@@ -55,6 +59,10 @@ section {
 .button-start {
   bottom: 0;
   position: fixed;
+}
+
+li {
+  list-style: none;
 }
 
 /*

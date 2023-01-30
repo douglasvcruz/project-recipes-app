@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import useCopy from '../hooks/useCopy';
+import FilterContext from '../context/FilterContext';
 
-function RecipeFavoriteCard({ each, index, test, favoriteList, setFavoriteList }) {
+function RecipeFavoriteCard({ each, index, test }) {
   const { id, nationality, category, name, image, alcoholicOrNot, type } = each;
   const copia = useCopy();
   const history = useHistory();
+  const { favoriteList, setFavoriteList } = useContext(FilterContext);
 
   const localStorageFavorites = (e) => {
     setFavoriteList(favoriteList.filter((favorite) => favorite.id !== e));

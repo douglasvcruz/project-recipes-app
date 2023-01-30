@@ -14,19 +14,40 @@ function RecipeDetails({ match }) {
   const { location: { pathname } } = history;
   const [apiDetails, setApiDetails] = useState([]);
   const [toggle, setToggle] = useState(false);
+  const [ingredients, setIngredients] = useState([{}]);
   const copia = useCopy();
   const six = 6;
+  const test = pathname.includes('/meals');
 
   const { id } = useParams();
+
+  const saveIngredients = () => {
+    const obj = {
+      ingredient: Object.entries(apiDetails[0] || [])
+        .filter((a) => a[0].includes('strIngredient')
+        && (a[1] !== null && a[1].length) !== 0 && a[1] !== null).map((b) => b[1]),
+      measure: Object.entries(apiDetails[0] || [])
+        .filter((a) => a[0].includes('strMeasure')
+      && a[1] !== ' ' && a[1] !== null).map((b) => b[1]),
+    };
+    setIngredients(obj);
+  };
+
+  useEffect(() => {
+    saveIngredients();
+  }, [apiDetails]);
+
   const fetchDetails = async () => {
     let url = '';
     if (pathname === `/meals/${id}`) {
       url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
+      const api = await makeFetch(url);
+      setApiDetails(api.meals);
     } else {
       url = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
+      const api = await makeFetch(url);
+      setApiDetails(api.drinks);
     }
-    const api = await makeFetch(url);
-    setApiDetails(api);
   };
 
   const localFavorites = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
@@ -58,9 +79,9 @@ function RecipeDetails({ match }) {
     if (localFavorites.some((a) => a.id === id)) {
       localStorage.setItem('favoriteRecipes', JSON
         .stringify(localFavorites.filter((a) => a.id !== id)));
-    } else if (pathname.includes('/meals')) {
+    } else if (test) {
       const { idMeal, strMeal, strArea,
-        strMealThumb, strCategory, strInstructions } = apiDetails.meals[0];
+        strMealThumb, strCategory } = apiDetails[0];
       localStorage.setItem('favoriteRecipes', JSON.stringify([...localFavorites, {
         id: idMeal,
         type: 'meal',
@@ -69,11 +90,10 @@ function RecipeDetails({ match }) {
         alcoholicOrNot: '',
         name: strMeal,
         image: strMealThumb,
-        strInstructions,
       }]));
     } else {
       const { idDrink, strDrink, strCategory,
-        strDrinkThumb, strAlcoholic, strInstructions } = apiDetails.drinks[0];
+        strDrinkThumb, strAlcoholic } = apiDetails[0];
       localStorage.setItem('favoriteRecipes', JSON.stringify([...localFavorites, {
         id: idDrink,
         type: 'drink',
@@ -82,7 +102,6 @@ function RecipeDetails({ match }) {
         alcoholicOrNot: strAlcoholic,
         name: strDrink,
         image: strDrinkThumb,
-        strInstructions,
       }]));
     }
     setToggle(!toggle);
@@ -114,112 +133,54 @@ function RecipeDetails({ match }) {
       >
         <img src={ shareIcon } alt="share icon" />
       </button>
-      { pathname.includes('/drinks')
-        ? (
-          <section>
-            { apiDetails.length !== 0 && apiDetails.drinks
-              .map((a, i) => (
-                <button
-                  className="recipe-card"
-                  type="button"
-                  key={ a.idDrink }
-                  data-testid={ `${i}-recipe-card` }
+      <section className="sect">
+        { (apiDetails || []).map((a, i) => (
+          <button
+            className="recipe-card"
+            type="button"
+            key={ test ? a.idMeal : a.idDrink }
+            data-testid={ `${i}-recipe-card` }
+          >
+            { (ingredients.ingredient || []).map((b, index) => (
+              <li className="ingredients" key={ index }>
+                <p
+                  data-testid={ `${index}-ingredient-name-and-measure` }
                 >
-                  <p data-testid="recipe-category">{a.strAlcoholic}</p>
-                  <p data-testid="recipe-title">{a.strDrink}</p>
-                  { Object.keys(a)
-                    .filter((c) => c.includes('strIngredient')).map((d, index) => (
-                      <p
-                        key={ d }
-                        data-testid={ `${index}-ingredient-name-and-measure` }
-                      >
-                        {a[d]}
-                      </p>))}
-                  { Object.keys(a)
-                    .filter((c) => c.includes('strMeasure')).map((d, index) => (
-                      <p
-                        key={ d }
-                        data-testid={ `${index}-ingredient-name-and-measure` }
-                      >
-                        {a[d]}
-                      </p>))}
-                  <p data-testid="instructions">{a.strInstructions}</p>
-                  <img
-                    src={ a.strDrinkThumb }
-                    alt="Imagem da receita"
-                    data-testid="recipe-photo"
-                  />
-                </button>))}
-            <div className="carousel">
-              { meals.length !== 0
-               && meals.slice(0, six).map(({ strMeal, strMealThumb }, index) => (
-                 <div
-                   className="carousel-div"
-                   key={ index }
-                   data-testid={ `${index}-recommendation-card` }
-                 >
-                   <img src={ strMealThumb } alt="Imagem do Meal" />
-                   <p data-testid={ `${index}-recommendation-title` }>{strMeal}</p>
-                 </div>
-               ))}
+                  {`${b} ${ingredients.measure[index]}`}
+                </p>
+              </li>
+            )) }
+            <p data-testid="recipe-category">{test ? a.strCategory : a.strAlcoholic}</p>
+            <p data-testid="recipe-title">{test ? a.strMeal : a.strDrink}</p>
+            { test ? <iframe
+              data-testid="video"
+              src={ a.strYoutube.replace('watch?v=', 'embed/') }
+              title="YouTube video player"
+            /> : ''}
+            <p data-testid="instructions">{a.strInstructions}</p>
+            <img
+              src={ test ? a.strMealThumb : a.strDrinkThumb }
+              alt="Imagem da receita"
+              data-testid="recipe-photo"
+            />
+          </button>))}
+        <div className="carousel">
+          { ((test ? drinks : meals) || []).slice(0, six).map((b, index) => (
+            <div
+              className="carousel-div"
+              key={ index }
+              data-testid={ `${index}-recommendation-card` }
+            >
+              <img src={ test ? b.strDrinkThumb : b.strMealThumb } alt="Imagem do Meal" />
+              <p
+                data-testid={ `${index}-recommendation-title` }
+              >
+                {test ? b.strDrink : b.strMeal}
+              </p>
             </div>
-          </section>
-        ) : (
-          <section>
-            { apiDetails.length !== 0 && apiDetails.meals
-              .map((a, i) => (
-                <button
-                  className="recipe-card"
-                  type="button"
-                  key={ a.idMeal }
-                  data-testid={ `${i}-recipe-card` }
-                >
-                  <p data-testid="recipe-category">{a.strCategory}</p>
-                  <p data-testid="recipe-title">{a.strMeal}</p>
-                  <iframe
-                    data-testid="video"
-                    src={ a.strYoutube.replace('watch?v=', 'embed/') }
-                    title="YouTube video player"
-                  />
-                  { Object.keys(a)
-                    .filter((c) => c.includes('strIngredient')).map((d, index) => (
-                      <p
-                        key={ d }
-                        data-testid={ `${index}-ingredient-name-and-measure` }
-                      >
-                        {a[d]}
-                      </p>))}
-                  { Object.keys(a)
-                    .filter((c) => c.includes('strMeasure')).map((d, index) => (
-                      <p
-                        key={ d }
-                        data-testid={ `${index}-ingredient-name-and-measure` }
-                      >
-                        {a[d]}
-                      </p>))}
-                  <p data-testid="instructions">{a.strInstructions}</p>
-                  <img
-                    src={ a.strMealThumb }
-                    alt="Imagem da receita"
-                    data-testid="recipe-photo"
-                  />
-                </button>
-              ))}
-            <div className="carousel">
-              { drinks.length !== 0
-               && drinks.slice(0, six).map(({ strDrink, strDrinkThumb }, index) => (
-                 <div
-                   className="carousel-div"
-                   key={ index }
-                   data-testid={ `${index}-recommendation-card` }
-                 >
-                   <img src={ strDrinkThumb } alt="Imagem do drink" />
-                   <p data-testid={ `${index}-recommendation-title` }>{strDrink}</p>
-                 </div>
-               ))}
-            </div>
-          </section>
-        )}
+          ))}
+        </div>
+      </section>
       <button
         onClick={ saveLocalStorageInProgress }
         className="button-start"
