@@ -15,6 +15,7 @@ function FilterProvider({ children }) {
   const [toggle, setToggle] = useState('');
   const [categoryDrinks, setCategoryDrinks] = useState([]);
   const [categoryMeals, setCategoryMeals] = useState([]);
+  const [favoriteList, setFavoriteList] = useState([]);
 
   const fetchApis = async () => {
     const url = {
@@ -66,13 +67,15 @@ function FilterProvider({ children }) {
       handleApi,
       categoryMeals,
       categoryDrinks,
-
+      favoriteList,
+      setFavoriteList,
     }),
     [
       handleApi,
       categoryMeals,
       categoryDrinks,
-
+      favoriteList,
+      setFavoriteList,
     ],
   );
   return (

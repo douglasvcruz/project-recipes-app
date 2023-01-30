@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import RecipeFavoriteCard from '../components/RecipeFavoriteCard';
+import FilterContext from '../context/FilterContext';
 
 function FavoriteRecipes() {
   const [status, setStatus] = useState({ all: true });
   const { drink, meal, all } = status;
-  const [favoriteList, setFavoriteList] = useState([]);
+  const { favoriteList, setFavoriteList } = useContext(FilterContext);
 
   useEffect(() => {
     const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
@@ -15,8 +16,6 @@ function FavoriteRecipes() {
 
   const meals = (favoriteList || []).filter((each) => each.type === 'meal');
   const drinks = (favoriteList || []).filter((each) => each.type === 'drink');
-
-  console.log([[] || favoriteList]);
 
   return (
     <div>
@@ -37,7 +36,6 @@ function FavoriteRecipes() {
           onClick={ () => setStatus({ meal: true }) }
         >
           Food
-
         </button>
         <button
           type="button"
@@ -45,37 +43,28 @@ function FavoriteRecipes() {
           onClick={ () => setStatus({ drink: true }) }
         >
           Drinks
-
         </button>
       </div>
-      <div>
+      <div className="favorite-recipes">
         { all ? (favoriteList || [])
           .map((each, index) => (<RecipeFavoriteCard
             each={ each }
             key={ index }
             index={ index }
-            favoriteList={ favoriteList }
             test={ each.type }
-            setFavoriteList={ setFavoriteList }
           />)) : ''}
-
         { meal ? meals
           .map((each, index) => (<RecipeFavoriteCard
             each={ each }
             key={ index }
             index={ index }
-            favoriteList={ favoriteList }
-            setFavoriteList={ setFavoriteList }
             test={ each.type }
           />)) : ''}
-
         { drink ? drinks
           .map((each, index) => (<RecipeFavoriteCard
             each={ each }
             key={ index }
             index={ index }
-            favoriteList={ favoriteList }
-            setFavoriteList={ setFavoriteList }
             test={ each.type }
           />)) : ''}
       </div>
