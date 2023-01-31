@@ -7,6 +7,7 @@ import FilterContext from './FilterContext';
 
 function FilterProvider({ children }) {
   const { setDrinks, setMeals, makeFetch } = useContext(AppContext);
+
   const twelve = 12;
 
   const history = useHistory();
@@ -24,6 +25,7 @@ function FilterProvider({ children }) {
       categoryMeals: 'https://www.themealdb.com/api/json/v1/1/list.php?c=list',
       categoryDrinks: 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list',
     };
+
     const five = 5;
     const apiMeals = await makeFetch(url.meals);
     const apiDrinks = await makeFetch(url.drinks);
@@ -46,14 +48,14 @@ function FilterProvider({ children }) {
     if (e === 'All' || e === toggle) {
       const apiMealsAll = await makeFetch(url.mealsAll);
       const apiDrinksAll = await makeFetch(url.drinksAll);
-      setMeals(apiMealsAll.meals.slice(0, twelve));
-      setDrinks(apiDrinksAll.drinks.slice(0, twelve));
+      setMeals((apiMealsAll || []).meals.slice(0, twelve));
+      setDrinks((apiDrinksAll || []).drinks.slice(0, twelve));
     } else if (e !== 'All' && pathname === '/meals') {
       const apiMeals = await makeFetch(url.meals);
-      setMeals(apiMeals.meals.slice(0, twelve));
+      setMeals((apiMeals || []).meals.slice(0, twelve));
     } else if (e !== 'All' && pathname === '/drinks') {
       const apiDrinks = await makeFetch(url.drinks);
-      setDrinks(apiDrinks.drinks.slice(0, twelve));
+      setDrinks((apiDrinks || []).drinks.slice(0, twelve));
     }
     setToggle(e);
   };

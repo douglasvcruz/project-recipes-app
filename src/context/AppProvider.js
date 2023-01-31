@@ -15,6 +15,7 @@ function AppProvider({ children }) {
   const [drinks, setDrinks] = useState('');
   const [meals, setMeals] = useState('');
   const searchHandleChange = useHandleChange('');
+
   const { makeFetch } = useFetch();
   const twelve = 12;
 
@@ -66,13 +67,13 @@ function AppProvider({ children }) {
       }
     }
     const api = await makeFetch(url);
-    if (api.drinks === null) {
+    if ((api || []).drinks === null) {
       global.alert('Sorry, we haven\'t found any recipes for these filters.');
     } else {
-      if (api.drinks.length === 1) {
-        history.push(`/drinks/${api.drinks[0].idDrink}`);
+      if ((api?.drinks || []).length === 1) {
+        history.push(`/drinks/${(api || []).drinks[0].idDrink}`);
       }
-      setDrinks(api.drinks.slice(0, twelve));
+      setDrinks((api || []).drinks.slice(0, twelve));
       searchHandleChange.setValue('');
     }
   };
