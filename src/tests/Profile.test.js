@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import Profile from '../pages/Profile';
 import { renderWithRouter } from './helpers/renderWith';
 
-describe('Testando storage da pagina perfil', () => {
+describe('testando', () => {
   test('testando', () => {
     renderWithRouter(<Profile />);
     const logout = screen.getByRole('link', {
