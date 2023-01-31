@@ -4,7 +4,7 @@ import { act } from 'react-dom/test-utils';
 import App from '../App';
 import { renderWithRouter } from './helpers/renderWith';
 
-const serachIcon = 'search-top-btn';
+const searchTopBtn = 'search-top-btn';
 
 describe('testando o componente Header', () => {
   test('Verifica se os elementos sao renderizados', () => {
@@ -13,11 +13,11 @@ describe('testando o componente Header', () => {
       history.push('/meals');
     });
 
-    const profileIcon = screen.getByTestId('profile-top-btn');
-    const searchIcon = screen.getByTestId(serachIcon);
+    const profileTop = screen.getByTestId('profile-top-btn');
+    const searchTop = screen.getByTestId(searchTopBtn);
     const title = screen.getByTestId('page-title');
-    expect(profileIcon).toBeInTheDocument();
-    expect(searchIcon).toBeInTheDocument();
+    expect(profileTop).toBeInTheDocument();
+    expect(searchTop).toBeInTheDocument();
     expect(title).toHaveTextContent('Meals');
   });
   test('testando o evento click nos inputs', () => {
@@ -26,8 +26,8 @@ describe('testando o componente Header', () => {
       history.push('/meals');
     });
 
-    const searchIcon = screen.getByTestId(serachIcon);
-    userEvent.click(searchIcon);
+    const searchTop = screen.getByTestId(searchTopBtn);
+    userEvent.click(searchTop);
     const searchInput = screen.getByTestId('search-input');
     expect(searchInput).toBeInTheDocument();
   });
@@ -40,8 +40,8 @@ describe('Verificando funções', () => {
       history.push('/meals');
     });
 
-    const profileIcon = screen.getByTestId('profile-top-btn');
-    userEvent.click(profileIcon);
+    const profileTop = screen.getByTestId('profile-top-btn');
+    userEvent.click(profileTop);
 
     await waitFor(() => {
       expect(history.location.pathname).toBe('/profile');
@@ -54,8 +54,8 @@ describe('Verificando funções', () => {
       history.push('/meals');
     });
 
-    const searchIcon = screen.getByTestId(serachIcon);
-    userEvent.click(searchIcon);
+    const searchTop = screen.getByTestId(searchTopBtn);
+    userEvent.click(searchTop);
     const searchInput = screen.getByTestId('search-input');
     userEvent.type(searchInput, 'Suco');
   });
