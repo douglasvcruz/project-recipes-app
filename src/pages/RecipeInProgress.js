@@ -18,8 +18,8 @@ function RecipeInProgress() {
   const { id } = useParams();
   const { makeFetch } = useFetch();
   const history = useHistory();
-  const { location: { pathname } } = history;
 
+  const { location: { pathname } } = history;
   const test = pathname.includes(`/meals/${id}`);
 
   const fetchDetails = async () => {
@@ -34,7 +34,6 @@ function RecipeInProgress() {
   };
 
   const localFavorites = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
-
   const localStorageFavorites = () => {
     if (localFavorites.some((a) => a.id === id)) {
       localStorage.setItem('favoriteRecipes', JSON
@@ -103,26 +102,26 @@ function RecipeInProgress() {
     const progressLocal = JSON.parse(localStorage.getItem('inProgressRecipes')) || [];
     setLocal(progressLocal);
   };
-
+  const localDone = JSON.parse(localStorage.getItem('doneRecipes')) || [];
   const redirectDoneRecipes = () => {
     if (test) {
       const { idMeal, strMeal, strArea,
         strMealThumb, strCategory, strTags } = startApi[0];
-      localStorage.setItem('doneRecipes', JSON.stringify([...localFavorites, {
+      localStorage.setItem('doneRecipes', JSON.stringify([...localDone, {
         id: idMeal,
         nationality: strArea,
         name: strMeal,
         category: strCategory,
         image: strMealThumb,
         type: 'meal',
-        tags: strTags.split(','),
+        tags: ((strTags !== null ? strTags : '').split(',')),
         alcoholicOrNot: '',
         doneDate: new Date(),
       }]));
     } else {
       const { idDrink, strDrink, strCategory,
         strDrinkThumb, strAlcoholic } = startApi[0];
-      localStorage.setItem('doneRecipes', JSON.stringify([...localFavorites, {
+      localStorage.setItem('doneRecipes', JSON.stringify([...localDone, {
         id: idDrink,
         type: 'drink',
         nationality: '',
@@ -148,16 +147,13 @@ function RecipeInProgress() {
     };
     setIngredients(obj);
   };
-
   useEffect(() => {
     fetchDetails();
   }, []);
-
   useEffect(() => {
     saveIngredients();
     setCheck(((local.meals || [])[id] || []).length);
   }, [startApi]);
-
   useEffect(() => {
     const input = document.getElementsByName('checkbox');
     if (check === input.length) {
@@ -165,7 +161,6 @@ function RecipeInProgress() {
     }
     checkedButtons();
   }, [toggle]);
-
   return (
     <div>
       {(ingredients.ingredient || []).map((d, index) => (

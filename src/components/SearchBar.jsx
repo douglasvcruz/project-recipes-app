@@ -62,7 +62,7 @@ function SearchBar() {
       <br />
       <button
         data-testid="exec-search-btn"
-        onClick={ pathname === '/meals' ? fetchMeals : fetchDrinks }
+        onClick={ pathname === '/meals' ? (fetchMeals || []) : (fetchDrinks || []) }
       >
         Search
       </button>

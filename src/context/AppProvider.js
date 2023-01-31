@@ -15,13 +15,14 @@ function AppProvider({ children }) {
   const [drinks, setDrinks] = useState('');
   const [meals, setMeals] = useState('');
   const searchHandleChange = useHandleChange('');
+
   const { makeFetch } = useFetch();
   const twelve = 12;
 
   const validationError = () => {
     const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
     const num = 7;
-    const allTests = regex.test(email.value) && password.value.length >= num;
+    const allTests = regex.test(email.value) && password.value?.length >= num;
     if (allTests) {
       setDisabled(false);
     } else {
@@ -37,18 +38,18 @@ function AppProvider({ children }) {
       url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchHandleChange.value}`;
     } else {
       url = `https://www.themealdb.com/api/json/v1/1/search.php?f=${searchHandleChange.value}`;
-      if (searchHandleChange.value.length > 1) {
+      if ((searchHandleChange.value || []).length > 1) {
         global.alert('Your search must have only 1 (one) character');
       }
     }
     const api = await makeFetch(url);
-    if (api.meals === null) {
+    if (api?.meals === null) {
       global.alert('Sorry, we haven\'t found any recipes for these filters.');
     } else {
-      if (api.meals.length === 1) {
+      if ((api?.meals || []).length === 1) {
         history.push(`/meals/${api.meals[0].idMeal}`);
       }
-      setMeals(api.meals.slice(0, twelve));
+      setMeals(api?.meals?.slice(0, twelve));
       searchHandleChange.setValue('');
     }
   };
@@ -66,13 +67,13 @@ function AppProvider({ children }) {
       }
     }
     const api = await makeFetch(url);
-    if (api.drinks === null) {
+    if ((api || []).drinks === null) {
       global.alert('Sorry, we haven\'t found any recipes for these filters.');
     } else {
-      if (api.drinks.length === 1) {
-        history.push(`/drinks/${api.drinks[0].idDrink}`);
+      if ((api?.drinks || []).length === 1) {
+        history.push(`/drinks/${(api || []).drinks[0].idDrink}`);
       }
-      setDrinks(api.drinks.slice(0, twelve));
+      setDrinks(api?.drinks?.slice(0, twelve));
       searchHandleChange.setValue('');
     }
   };
