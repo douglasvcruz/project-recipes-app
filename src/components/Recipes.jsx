@@ -11,7 +11,7 @@ function Recipes() {
       { pathname === '/drinks'
         ? (
           <section>
-            { drinks.length !== 0 && drinks
+            { (drinks || []).length !== 0 && drinks
               .map(({ strDrinkThumb, strDrink, idDrink }, i) => (
                 <button
                   className="recipe-card"
@@ -32,7 +32,7 @@ function Recipes() {
         )
         : (
           <section>
-            { meals.length !== 0 && meals
+            { (meals || []).length !== 0 && meals
               .map(({ strMealThumb, strMeal, idMeal }, i) => (
                 <button
                   className="recipe-card"

@@ -32,10 +32,10 @@ function FilterProvider({ children }) {
     const apiCategoryMeals = await makeFetch(url.categoryMeals);
     const apiCategoryDrinks = await makeFetch(url.categoryDrinks);
 
-    setMeals(apiMeals.meals.slice(0, twelve));
-    setDrinks(apiDrinks.drinks.slice(0, twelve));
-    setCategoryMeals(apiCategoryMeals.meals.slice(0, five));
-    setCategoryDrinks(apiCategoryDrinks.drinks.slice(0, five));
+    setMeals(apiMeals?.meals?.slice(0, twelve));
+    setDrinks(apiDrinks?.drinks?.slice(0, twelve));
+    setCategoryMeals(apiCategoryMeals?.meals?.slice(0, five));
+    setCategoryDrinks(apiCategoryDrinks?.drinks?.slice(0, five));
   };
 
   const handleApi = async (e) => {
@@ -48,14 +48,14 @@ function FilterProvider({ children }) {
     if (e === 'All' || e === toggle) {
       const apiMealsAll = await makeFetch(url.mealsAll);
       const apiDrinksAll = await makeFetch(url.drinksAll);
-      setMeals((apiMealsAll || []).meals.slice(0, twelve));
-      setDrinks((apiDrinksAll || []).drinks.slice(0, twelve));
+      setMeals((apiMealsAll || []).meals?.slice(0, twelve));
+      setDrinks((apiDrinksAll || []).drinks?.slice(0, twelve));
     } else if (e !== 'All' && pathname === '/meals') {
       const apiMeals = await makeFetch(url.meals);
-      setMeals((apiMeals || []).meals.slice(0, twelve));
+      setMeals((apiMeals || []).meals?.slice(0, twelve));
     } else if (e !== 'All' && pathname === '/drinks') {
       const apiDrinks = await makeFetch(url.drinks);
-      setDrinks((apiDrinks || []).drinks.slice(0, twelve));
+      setDrinks((apiDrinks || []).drinks?.slice(0, twelve));
     }
     setToggle(e);
   };
