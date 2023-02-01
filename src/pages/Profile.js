@@ -19,30 +19,23 @@ function Profile() {
           type="button"
           data-testid="profile-done-btn"
         >
-          <Link to="/done-recipes">
-            Done Recipes
-          </Link>
+          <Link to="/done-recipes">Done Recipes</Link>
         </button>
         <button
           type="button"
           data-testid="profile-favorite-btn"
         >
-          <Link to="/favorite-recipes">
-            Favorite Recipes
-          </Link>
+          <Link to="/favorite-recipes">Favorite Recipes</Link>
         </button>
         <button
           type="button"
           data-testid="profile-logout-btn"
           onClick={ clearLocalStorage }
         >
-          <Link to="/">
-            Logout
-          </Link>
+          <Link to="/">Logout</Link>
         </button>
       </div>
       <Footer />
-
     </div>
   );
 }

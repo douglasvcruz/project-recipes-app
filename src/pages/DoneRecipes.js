@@ -10,7 +10,8 @@ function DoneRecipes() {
 
   const copia = useCopy();
   const history = useHistory();
-  const local = JSON.parse(localStorage.getItem('doneRecipes')) || [];
+
+  const local = JSON.parse(localStorage.getItem('doneRecipes'));
 
   useEffect(() => {
     setDoneRecipes(local);
@@ -56,11 +57,9 @@ function DoneRecipes() {
           Drinks
         </button>
       </div>
-      {console.log(doneRecipes)}
       { (doneRecipes || []).map((e, index) => (
         <div key={ index }>
           <p>{copia.copied}</p>
-          <h1 data-testid={ `${index}-horizontal-name` }>{ e.name }</h1>
           <button
             type="button"
             style={ { border: 'none', backgroundColor: 'inherit' } }
@@ -94,6 +93,7 @@ function DoneRecipes() {
               ? `/meals/${e.id}`
               : `/drinks/${e.id}`) }
           >
+            <h1 data-testid={ `${index}-horizontal-name` }>{ e.name }</h1>
             <img
               src={ e.image }
               alt={ e.name }

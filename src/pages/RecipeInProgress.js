@@ -14,9 +14,9 @@ function RecipeInProgress() {
   const [ingredients, setIngredients] = useState([]);
   const [check, setCheck] = useState('');
 
-  const copia = useCopy();
   const { id } = useParams();
   const { makeFetch } = useFetch();
+  const copia = useCopy();
   const history = useHistory();
 
   const { location: { pathname } } = history;
@@ -34,6 +34,7 @@ function RecipeInProgress() {
   };
 
   const localFavorites = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+
   const localStorageFavorites = () => {
     if (localFavorites.some((a) => a.id === id)) {
       localStorage.setItem('favoriteRecipes', JSON
@@ -102,6 +103,7 @@ function RecipeInProgress() {
     const progressLocal = JSON.parse(localStorage.getItem('inProgressRecipes')) || [];
     setLocal(progressLocal);
   };
+
   const localDone = JSON.parse(localStorage.getItem('doneRecipes')) || [];
   const redirectDoneRecipes = () => {
     if (test) {
@@ -140,20 +142,23 @@ function RecipeInProgress() {
     const obj = {
       ingredient: Object.entries(startApi[0] || [])
         .filter((a) => a[0].includes('strIngredient')
-        && (a[1] !== null && a[1].length !== 0) && a[1] !== null).map((b) => b[1]),
+        && a[1] !== null && a[1].length !== 0).map((b) => b[1]),
       measure: Object.entries(startApi[0] || [])
         .filter((a) => a[0].includes('strMeasure')
       && a[1] !== ' ' && a[1] !== null).map((b) => b[1]),
     };
     setIngredients(obj);
   };
+
   useEffect(() => {
     fetchDetails();
   }, []);
+
   useEffect(() => {
     saveIngredients();
     setCheck(((local.meals || [])[id] || []).length);
   }, [startApi]);
+
   useEffect(() => {
     const input = document.getElementsByName('checkbox');
     if (check === input.length) {
@@ -161,9 +166,10 @@ function RecipeInProgress() {
     }
     checkedButtons();
   }, [toggle]);
+
   return (
     <div>
-      {(ingredients.ingredient || []).map((d, index) => (
+      {ingredients.ingredient?.map((d, index) => (
         <li
           key={ index }
         >
@@ -190,7 +196,6 @@ function RecipeInProgress() {
           <h1 data-testid="recipe-title">{ test ? e.strMeal : e.strDrink }</h1>
           <button
             type="button"
-            style={ { border: 'none', backgroundColor: 'inherit' } }
             onClick={ () => (test
               ? copia.copyButton(`/meals/${e.idMeal}`)
               : copia.copyButton(`/drinks/${e.idDrink}`)) }
@@ -203,7 +208,6 @@ function RecipeInProgress() {
           </button>
           <button
             type="button"
-            style={ { border: 'none', backgroundColor: 'inherit' } }
             onClick={ localStorageFavorites }
           >
             <img

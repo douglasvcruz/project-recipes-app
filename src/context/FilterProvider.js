@@ -10,8 +10,7 @@ function FilterProvider({ children }) {
 
   const twelve = 12;
 
-  const history = useHistory();
-  const { location: { pathname } } = history;
+  const { location: { pathname } } = useHistory();
 
   const [toggle, setToggle] = useState('');
   const [categoryDrinks, setCategoryDrinks] = useState([]);
@@ -48,14 +47,14 @@ function FilterProvider({ children }) {
     if (e === 'All' || e === toggle) {
       const apiMealsAll = await makeFetch(url.mealsAll);
       const apiDrinksAll = await makeFetch(url.drinksAll);
-      setMeals((apiMealsAll || []).meals?.slice(0, twelve));
-      setDrinks((apiDrinksAll || []).drinks?.slice(0, twelve));
+      setMeals(apiMealsAll?.meals?.slice(0, twelve));
+      setDrinks(apiDrinksAll?.drinks?.slice(0, twelve));
     } else if (e !== 'All' && pathname === '/meals') {
       const apiMeals = await makeFetch(url.meals);
-      setMeals((apiMeals || []).meals?.slice(0, twelve));
+      setMeals(apiMeals?.meals?.slice(0, twelve));
     } else if (e !== 'All' && pathname === '/drinks') {
       const apiDrinks = await makeFetch(url.drinks);
-      setDrinks((apiDrinks || []).drinks?.slice(0, twelve));
+      setDrinks(apiDrinks?.drinks?.slice(0, twelve));
     }
     setToggle(e);
   };

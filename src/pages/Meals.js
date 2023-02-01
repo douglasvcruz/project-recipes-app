@@ -9,7 +9,6 @@ function Meals() {
     <div>
       <Header
         title="Meals"
-        haveSearch
       />
       <Filters />
       <Recipes />

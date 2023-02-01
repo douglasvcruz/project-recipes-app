@@ -7,8 +7,8 @@ import mockMeals from './helpers/mocks/mockMeals';
 import mockDrinks from './helpers/mocks/mockDrinks';
 
 const mealPath = '/meals/52977';
-const drinkpath = '/drinks/13938';
-const startReceipebtn = 'start-recipe-btn';
+const drinkPath = '/drinks/13938';
+const startRecipe = 'start-recipe-btn';
 
 const drinkToFav = [{
   alcoholicOrNot: 'Alcoholic',
@@ -27,7 +27,7 @@ afterEach(() => {
   jest.clearAllMocks();
 });
 
-const receipeImage = 'recipe-photo';
+const recipeImage = 'recipe-photo';
 const favoriteButton = 'favorite-btn';
 
 describe('Testando o componente RecipeDetails', () => {
@@ -40,23 +40,23 @@ describe('Testando o componente RecipeDetails', () => {
       const video = screen.getByTestId('video');
       expect(video).toBeInTheDocument();
     });
-    expect(screen.getByTestId(startReceipebtn)).toBeInTheDocument();
+    expect(screen.getByTestId(startRecipe)).toBeInTheDocument();
 
     await waitFor(() => {
-      expect(screen.getByTestId(receipeImage)).toHaveAttribute('src', 'https://www.themealdb.com/images/media/meals/58oia61564916529.jpg');
+      expect(screen.getByTestId(recipeImage)).toHaveAttribute('src', 'https://www.themealdb.com/images/media/meals/58oia61564916529.jpg');
     });
   });
 
   it('verifica a requisição de drinks:id', async () => {
     const { history } = renderWithRouter(<App />);
     act(() => {
-      history.push(drinkpath);
+      history.push(drinkPath);
     });
     await waitFor(() => {
-      expect(screen.getByTestId(receipeImage)).toHaveAttribute('src', 'https://www.thecocktaildb.com/images/media/drink/rhhwmp1493067619.jpg');
+      expect(screen.getByTestId(recipeImage)).toHaveAttribute('src', 'https://www.thecocktaildb.com/images/media/drink/rhhwmp1493067619.jpg');
     });
 
-    expect(screen.getByTestId(receipeImage)).toBeInTheDocument();
+    expect(screen.getByTestId(recipeImage)).toBeInTheDocument();
     expect(screen.getByTestId('recipe-title')).toBeInTheDocument();
     expect(screen.getByTestId('recipe-category')).toBeInTheDocument();
     expect(screen.getByTestId('instructions')).toBeInTheDocument();
@@ -79,7 +79,7 @@ describe('Verificando os botoes do componente', () => {
     act(() => {
       history.push(mealPath);
     });
-    userEvent.click(screen.getByTestId(startReceipebtn));
+    userEvent.click(screen.getByTestId(startRecipe));
 
     await waitFor(() => {
       expect(history.location.pathname).toBe(`${mealPath}/in-progress`);
@@ -106,7 +106,7 @@ describe('verificando o botão de favorito', () => {
     });
     const { history } = renderWithRouter(<App />);
     act(() => {
-      history.push(drinkpath);
+      history.push(drinkPath);
     });
 
     userEvent.click(screen.getByTestId(favoriteButton));

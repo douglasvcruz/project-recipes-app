@@ -9,7 +9,6 @@ function Drinks() {
     <div>
       <Header
         title="Drinks"
-        haveSearch
       />
       <Filters />
       <Recipes />
