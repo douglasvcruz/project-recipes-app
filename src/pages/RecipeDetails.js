@@ -24,11 +24,12 @@ function RecipeDetails({ match }) {
     const obj = {
       ingredient: Object.entries(apiDetails[0] || [])
         .filter((a) => a[0].includes('strIngredient')
-        && (a[1] !== null && a[1].length) !== 0 && a[1] !== null).map((b) => b[1]),
+        && a[1]?.length !== 0 && a[1] !== null).map((b) => b[1]),
       measure: Object.entries(apiDetails[0] || [])
         .filter((a) => a[0].includes('strMeasure')
       && a[1] !== ' ' && a[1] !== null).map((b) => b[1]),
     };
+    console.log(apiDetails[0]);
     setIngredients(obj);
   };
 
@@ -140,12 +141,12 @@ function RecipeDetails({ match }) {
             key={ test ? a.idMeal : a.idDrink }
             data-testid={ `${i}-recipe-card` }
           >
-            { (ingredients.ingredient || []).map((b, index) => (
+            { ingredients.ingredient?.map((b, index) => (
               <li className="ingredients" key={ index }>
                 <p
                   data-testid={ `${index}-ingredient-name-and-measure` }
                 >
-                  {`${b} ${ingredients.measure[index]}`}
+                  { `${b} ${ingredients.measure[index] || ''}` }
                 </p>
               </li>
             )) }

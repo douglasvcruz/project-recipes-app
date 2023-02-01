@@ -14,8 +14,8 @@ function FavoriteRecipes() {
     setFavoriteList(favoriteRecipes);
   }, []);
 
-  const meals = (favoriteList || []).filter((each) => each.type === 'meal');
-  const drinks = (favoriteList || []).filter((each) => each.type === 'drink');
+  const meals = favoriteList?.filter((each) => each.type === 'meal');
+  const drinks = favoriteList?.filter((each) => each.type === 'drink');
 
   return (
     <div>
@@ -46,27 +46,30 @@ function FavoriteRecipes() {
         </button>
       </div>
       <div className="favorite-recipes">
-        { all ? (favoriteList || [])
-          .map((each, index) => (<RecipeFavoriteCard
-            each={ each }
-            key={ index }
-            index={ index }
-            test={ each.type }
-          />)) : ''}
+        { all ? favoriteList
+          ?.map((each, index) => (
+            <RecipeFavoriteCard
+              each={ each }
+              key={ index }
+              index={ index }
+              test={ each.type }
+            />)) : ''}
         { meal ? meals
-          .map((each, index) => (<RecipeFavoriteCard
-            each={ each }
-            key={ index }
-            index={ index }
-            test={ each.type }
-          />)) : ''}
+          ?.map((each, index) => (
+            <RecipeFavoriteCard
+              each={ each }
+              key={ index }
+              index={ index }
+              test={ each.type }
+            />)) : ''}
         { drink ? drinks
-          .map((each, index) => (<RecipeFavoriteCard
-            each={ each }
-            key={ index }
-            index={ index }
-            test={ each.type }
-          />)) : ''}
+          ?.map((each, index) => (
+            <RecipeFavoriteCard
+              each={ each }
+              key={ index }
+              index={ index }
+              test={ each.type }
+            />)) : ''}
       </div>
       <Footer />
     </div>

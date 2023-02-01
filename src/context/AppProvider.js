@@ -46,7 +46,7 @@ function AppProvider({ children }) {
     if (api?.meals === null) {
       global.alert('Sorry, we haven\'t found any recipes for these filters.');
     } else {
-      if ((api?.meals || []).length === 1) {
+      if (api?.meals.length === 1) {
         history.push(`/meals/${api.meals[0].idMeal}`);
       }
       setMeals(api?.meals?.slice(0, twelve));
@@ -67,10 +67,10 @@ function AppProvider({ children }) {
       }
     }
     const api = await makeFetch(url);
-    if ((api || []).drinks === null) {
+    if (api?.drinks === null) {
       global.alert('Sorry, we haven\'t found any recipes for these filters.');
     } else {
-      if ((api?.drinks || []).length === 1) {
+      if (api?.drinks.length === 1) {
         history.push(`/drinks/${(api || []).drinks[0].idDrink}`);
       }
       setDrinks(api?.drinks?.slice(0, twelve));

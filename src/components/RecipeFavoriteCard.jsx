@@ -48,7 +48,6 @@ function RecipeFavoriteCard({ each, index, test }) {
       )}
       <button
         type="button"
-        style={ { border: 'none', backgroundColor: 'inherit' } }
         onClick={ () => { copia.copyButton(`/${type}s/${id}`); } }
       >
         <img
@@ -60,7 +59,6 @@ function RecipeFavoriteCard({ each, index, test }) {
       </button>
       <button
         type="button"
-        style={ { border: 'none', backgroundColor: 'inherit' } }
         onClick={ () => localStorageFavorites(id) }
       >
         <img

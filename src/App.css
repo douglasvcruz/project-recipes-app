@@ -1,6 +1,82 @@
 * {
+  border: 0;
   margin: 0;
   padding: 0;
+}
+
+body {
+  background-color: white;
+}
+
+img {
+  width: 100%;
+}
+
+.tomate {
+  position: absolute;
+  top: 158px;
+}
+
+.login {
+  color: #41197f;
+  font-family: ' Segoe UI ' , Tahoma , Geneva , Verdana , sans-serif;
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: 0.165em;
+  line-height: 20px;
+  margin-top: 80px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.section-logo img {
+  margin-top: 30px;
+  width: 55%;
+}
+
+.section-logo {
+  background-color: #41197f;
+  height: 346px;
+}
+
+.form-login {
+  align-items: center;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.email, .password {
+  border: 1px solid #41197f;
+  border-radius: 5px;
+  color: #41197f;
+  font-family: ' Segoe UI ' , Tahoma , Geneva , Verdana , sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+  height: 40px;
+  line-height: 14px;
+  margin: 5px;
+  padding-left: 20px;
+  width: 256px;
+}
+
+.button-login {
+  background-color: #fcc436;
+  border-radius: 5px;
+  color: white;
+  font-family: ' Segoe UI ' , Tahoma , Geneva , Verdana , sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  height: 40px;
+  letter-spacing: 0.03em;
+  line-height: 14px;
+  margin: 5px;
+  text-transform: uppercase;
+  width: 276px;
 }
 
 .meals {
@@ -23,10 +99,6 @@
 .rocksGlass {
   animation: shake 1s infinite ease;
   max-height: 80vh;
-}
-
-img {
-  width: 100%;
 }
 
 .test {
@@ -114,5 +186,20 @@ li {
 
   100% {
     transform: rotate(-10deg);
+  }
+}
+
+@media screen and ( min-width : 380px ) {
+
+  .section-logo img {
+    width: 350px;
+  }
+
+  .login {
+    margin-top: 30px;
+  }
+
+  .tomate {
+    display: none;
   }
 }

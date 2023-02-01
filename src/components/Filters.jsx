@@ -5,48 +5,28 @@ import FilterContext from '../context/FilterContext';
 function Filters() {
   const { handleApi, categoryDrinks, categoryMeals } = useContext(FilterContext);
   const { location: { pathname } } = useHistory();
+  const path = pathname.includes('meals');
 
   return (
     <div>
-      { pathname === '/meals' ? (
-        <section>
+      <section>
+        <button
+          type="button"
+          data-testid="All-category-filter"
+          onClick={ ({ target }) => handleApi(target.innerHTML) }
+        >
+          All
+        </button>
+        {(path ? categoryMeals : categoryDrinks)?.map(({ strCategory }) => (
           <button
             type="button"
-            data-testid="All-category-filter"
-            onClick={ ({ target }) => handleApi(target.innerHTML) }
+            key={ strCategory }
+            data-testid={ `${strCategory}-category-filter` }
+            onClick={ () => handleApi(strCategory) }
           >
-            All
-          </button>
-          {categoryMeals.map(({ strCategory }) => (
-            <button
-              type="button"
-              key={ strCategory }
-              data-testid={ `${strCategory}-category-filter` }
-              onClick={ () => handleApi(strCategory) }
-            >
-              { strCategory }
-            </button>))}
-        </section>
-      ) : (
-        <section>
-          <button
-            type="button"
-            data-testid="All-category-filter"
-            onClick={ ({ target }) => handleApi(target.innerHTML) }
-          >
-            All
-          </button>
-          {categoryDrinks.map(({ strCategory }) => (
-            <button
-              type="button"
-              key={ strCategory }
-              data-testid={ `${strCategory}-category-filter` }
-              onClick={ () => handleApi(strCategory) }
-            >
-              { strCategory }
-            </button>))}
-        </section>
-      )}
+            { strCategory }
+          </button>))}
+      </section>
     </div>
   );
 }

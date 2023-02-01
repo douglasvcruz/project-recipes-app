@@ -4,7 +4,7 @@ import drinkIcon from '../images/drinkIcon.svg';
 import mealIcon from '../images/mealIcon.svg';
 import '../styles/footer.css';
 
-export default function Footer() {
+function Footer() {
   return (
     <footer
       data-testid="footer"
@@ -12,7 +12,6 @@ export default function Footer() {
     >
       <button
         type="button"
-        style={ { border: 'none', backgroundColor: 'inherit' } }
       >
         <Link to="/drinks">
           <img src={ drinkIcon } alt="profile-icon" data-testid="drinks-bottom-btn" />
@@ -20,7 +19,6 @@ export default function Footer() {
       </button>
       <button
         type="button"
-        style={ { border: 'none', backgroundColor: 'inherit' } }
       >
         <Link to="/meals">
           <img src={ mealIcon } alt="profile-icon" data-testid="meals-bottom-btn" />
@@ -29,3 +27,5 @@ export default function Footer() {
     </footer>
   );
 }
+
+export default Footer;
