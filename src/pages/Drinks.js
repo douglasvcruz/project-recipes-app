@@ -6,14 +6,14 @@ import Recipes from '../components/Recipes';
 
 function Drinks() {
   return (
-    <div>
+    <>
       <Header
-        title="Drinks"
+        title="DRINKS"
       />
       <Filters />
       <Recipes />
       <Footer />
-    </div>
+    </>
   );
 }
 
