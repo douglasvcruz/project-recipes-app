@@ -1,0 +1,37 @@
+.section-filter {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.section-filter button {
+  background-color: white;
+}
+
+.filter-btn {
+  display: flex;
+  flex-direction: column;
+  height: 45px;
+}
+
+.section-filter p {
+  color: #797d86;
+  width: 60px;
+}
+
+.section-filter img {
+  height: 26px;
+  width: 59px;
+}
+
+.filter-text {
+  font-family: ' Segoe UI ' , Tahoma , Geneva , Verdana , sans-serif;
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 9px;
+  margin-top: 5px;
+  text-align: center;
+}
+

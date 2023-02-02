@@ -3,6 +3,10 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import RecipeFavoriteCard from '../components/RecipeFavoriteCard';
 import FilterContext from '../context/FilterContext';
+import drinkIcon from '../images/drinkIcon.svg';
+import mealIcon from '../images/mealIcon.svg';
+import fastFood from '../images/fastFood.svg';
+import '../styles/Favorites.css';
 
 function FavoriteRecipes() {
   const [status, setStatus] = useState({ all: true });
@@ -12,39 +16,45 @@ function FavoriteRecipes() {
   useEffect(() => {
     const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
     setFavoriteList(favoriteRecipes);
-  }, []);
+  }, [setFavoriteList]);
 
   const meals = favoriteList?.filter((each) => each.type === 'meal');
   const drinks = favoriteList?.filter((each) => each.type === 'drink');
 
   return (
-    <div>
+    <>
       <Header
         title="Favorite Recipes"
       />
-      <div>
+      <section className="section-filter">
         <button
+          className="filter-btn"
           type="button"
           data-testid="filter-by-all-btn"
           onClick={ () => setStatus({ all: true }) }
         >
-          All
+          <img src={ fastFood } alt="fast food" />
+          <p className="filter-text">All</p>
         </button>
         <button
+          className="filter-btn"
           type="button"
           data-testid="filter-by-meal-btn"
           onClick={ () => setStatus({ meal: true }) }
         >
-          Food
+          <img src={ mealIcon } alt="meal" />
+          <p className="filter-text">Foods</p>
         </button>
         <button
+          className="filter-btn"
           type="button"
           data-testid="filter-by-drink-btn"
           onClick={ () => setStatus({ drink: true }) }
         >
-          Drinks
+          <img src={ drinkIcon } alt="fast food" />
+          <p className="filter-text">Drinks</p>
         </button>
-      </div>
+      </section>
       <div className="favorite-recipes">
         { all ? favoriteList
           ?.map((each, index) => (
@@ -72,7 +82,7 @@ function FavoriteRecipes() {
             />)) : ''}
       </div>
       <Footer />
-    </div>
+    </>
   );
 }
 

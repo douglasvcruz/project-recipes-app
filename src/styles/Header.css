@@ -1,0 +1,44 @@
+.section-header {
+  align-items: center;
+  background-color: #fcdc36;
+  display: flex;
+  height: 52px;
+}
+
+.section-header button {
+  background-color: #fcdc36;
+  margin-right: 20px;
+}
+
+.icone-recipes {
+  margin-left: 20px;
+}
+
+.profile-icon {
+  margin-left: auto;
+}
+
+.search-icon {
+  margin-right: 400px;
+}
+
+header {
+  text-align: center;
+}
+
+.drink-img {
+  height: 30px;
+  margin-bottom: 10px;
+  margin-top: 30px;
+}
+
+.title {
+  font-family: ' Segoe UI ' , Tahoma , Geneva , Verdana , sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 900;
+  letter-spacing: 0.105em;
+  line-height: 20px;
+  text-align: center;
+  text-transform: uppercase;
+}

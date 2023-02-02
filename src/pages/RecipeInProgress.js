@@ -3,7 +3,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import useCopy from '../hooks/useCopy';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeart from '../images/blackHeartIcon.svg';
-import whiteHeart from '../images/whiteHeartIcon.svg';
+import whiteHeart from '../images/whiteHeartIcon.png';
 import useFetch from '../hooks/useFetch';
 
 function RecipeInProgress() {
@@ -157,7 +157,7 @@ function RecipeInProgress() {
   useEffect(() => {
     saveIngredients();
     setCheck(((local.meals || [])[id] || []).length);
-  }, [startApi]);
+  }, [setCheck, id, local.meals]);
 
   useEffect(() => {
     const input = document.getElementsByName('checkbox');
@@ -165,10 +165,10 @@ function RecipeInProgress() {
       setDisable(false);
     }
     checkedButtons();
-  }, [toggle]);
+  }, [toggle, check]);
 
   return (
-    <div>
+    <>
       {ingredients.ingredient?.map((d, index) => (
         <li
           key={ index }
@@ -235,7 +235,7 @@ function RecipeInProgress() {
           </button>
         </div>
       ))}
-    </div>
+    </>
   );
 }
 

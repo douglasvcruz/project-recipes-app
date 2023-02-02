@@ -4,23 +4,28 @@ import { useParams, useHistory } from 'react-router-dom';
 import AppContext from '../context/AppContext';
 import blackHeart from '../images/blackHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
-import whiteHeart from '../images/whiteHeartIcon.svg';
+import whiteHeart from '../images/whiteHeartIcon.png';
 import useCopy from '../hooks/useCopy';
+import '../styles/RecipeDetails.css';
 
 function RecipeDetails({ match }) {
   const { makeFetch, drinks, meals } = useContext(AppContext);
+
   const history = useHistory();
   const { location: { pathname } } = history;
+
   const [apiDetails, setApiDetails] = useState([]);
   const [toggle, setToggle] = useState(false);
   const [ingredients, setIngredients] = useState([{}]);
+
   const copia = useCopy();
+
   const six = 6;
   const test = pathname.includes('/meals');
 
   const { id } = useParams();
 
-  const saveIngredients = () => {
+  useEffect(() => {
     const obj = {
       ingredient: Object.entries(apiDetails[0] || [])
         .filter((a) => a[0].includes('strIngredient')
@@ -29,12 +34,7 @@ function RecipeDetails({ match }) {
         .filter((a) => a[0].includes('strMeasure')
       && a[1] !== ' ' && a[1] !== null).map((b) => b[1]),
     };
-    console.log(apiDetails[0]);
     setIngredients(obj);
-  };
-
-  useEffect(() => {
-    saveIngredients();
   }, [apiDetails]);
 
   const fetchDetails = async () => {
@@ -112,31 +112,45 @@ function RecipeDetails({ match }) {
   }, [toggle]);
 
   return (
-    <div>
+    <section>
       <p>{copia.copied}</p>
-      <button
-        type="button"
-        onClick={ saveLocalStorageFavorites }
-      >
-        <img
-          data-testid="favorite-btn"
-          src={ localFavorites
-            .some((a) => a.id === id) ? blackHeart
-            : whiteHeart }
-          alt="white heart"
-        />
-      </button>
-      <button
-        type="button"
-        data-testid="share-btn"
-        onClick={ () => copia.copyButton(match.url) }
-      >
-        <img src={ shareIcon } alt="share icon" />
-      </button>
+      <header>
+        <button
+          type="button"
+          onClick={ saveLocalStorageFavorites }
+        >
+          <img
+            data-testid="favorite-btn"
+            src={ localFavorites
+              .some((a) => a.id === id) ? blackHeart
+              : whiteHeart }
+            alt="white heart"
+          />
+        </button>
+        <button
+          type="button"
+          data-testid="share-btn"
+          onClick={ () => copia.copyButton(match.url) }
+        >
+          <img src={ shareIcon } alt="share icon" />
+        </button>
+        { (apiDetails || []).map((a, i) => (
+          <div
+            className="img-recipe-details"
+            key={ i }
+          >
+            <img
+              key={ i }
+              src={ test ? a.strMealThumb : a.strDrinkThumb }
+              alt="Imagem da receita"
+              data-testid="recipe-photo"
+            />
+          </div>
+        ))}
+      </header>
       <section className="sect">
         { (apiDetails || []).map((a, i) => (
           <button
-            className="recipe-card"
             type="button"
             key={ test ? a.idMeal : a.idDrink }
             data-testid={ `${i}-recipe-card` }
@@ -158,11 +172,6 @@ function RecipeDetails({ match }) {
               title="YouTube video player"
             /> : ''}
             <p data-testid="instructions">{a.strInstructions}</p>
-            <img
-              src={ test ? a.strMealThumb : a.strDrinkThumb }
-              alt="Imagem da receita"
-              data-testid="recipe-photo"
-            />
           </button>))}
         <div className="carousel">
           { ((test ? drinks : meals) || []).slice(0, six).map((b, index) => (
@@ -192,7 +201,7 @@ function RecipeDetails({ match }) {
            ...Object.keys(localInProgress.meals || [])].some((a) => a === id)
           ? 'Continue Recipe' : 'Start Recipe' }
       </button>
-    </div>
+    </section>
   );
 }
 

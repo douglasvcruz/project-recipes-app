@@ -1,5 +1,6 @@
 * {
   border: 0;
+  color: #41197f;
   margin: 0;
   padding: 0;
 }
@@ -18,7 +19,6 @@ img {
 }
 
 .login {
-  color: #41197f;
   font-family: ' Segoe UI ' , Tahoma , Geneva , Verdana , sans-serif;
   font-size: 20px;
   font-style: italic;
@@ -51,7 +51,6 @@ img {
 .email, .password {
   border: 1px solid #41197f;
   border-radius: 5px;
-  color: #41197f;
   font-family: ' Segoe UI ' , Tahoma , Geneva , Verdana , sans-serif;
   font-size: 14px;
   font-style: normal;
@@ -136,20 +135,6 @@ section {
 li {
   list-style: none;
 }
-
-/*
-#iceLeft {
-  animation: clink .8s infinite ease;
-  opacity: 0.6;
-  transform-origin: 36px 66px;
-}
-
-#iceRight {
-  animation: clink .8s .2s infinite ease;
-  opacity: 0.6;
-  transform-origin: 60px 78px;
-}
-*/
 
 .meals > .logo {
   animation: shake 1.5s infinite ease;

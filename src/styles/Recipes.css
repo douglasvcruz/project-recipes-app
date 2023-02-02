@@ -1,0 +1,26 @@
+.recipes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.recipe-card {
+  background: white;
+  display: flex;
+  flex-direction: column;
+  margin: 0 5px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  width: 163.35px;
+}
+
+.recipe-card img {
+  border-radius: 5px 5px 0 0;
+  height: 134.85px;
+}
+
+.recipe-card p {
+  border: 0.517px solid #b1b1b1;
+  border-radius: 0 0 5px 5px;
+  padding: 6px;
+}

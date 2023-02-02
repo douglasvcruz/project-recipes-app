@@ -30,7 +30,7 @@ function DoneRecipes() {
   };
 
   return (
-    <div>
+    <>
       <Header
         title="Done Recipes"
       />
@@ -103,7 +103,7 @@ function DoneRecipes() {
         </div>
       ))}
       <Footer />
-    </div>
+    </>
   );
 }
 

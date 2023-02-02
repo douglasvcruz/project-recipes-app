@@ -81,7 +81,7 @@ function FilterProvider({ children }) {
   );
   return (
     <FilterContext.Provider value={ values }>
-      <div className="App">{children}</div>
+      {children}
     </FilterContext.Provider>
   );
 }
