@@ -74,7 +74,7 @@ function DoneRecipes() {
             />
           </button>
           <p data-testid={ `${index}-horizontal-done-date` }>{e.doneDate}</p>
-          {e.tags.map((b) => (
+          {e.tags?.map((b) => (
             <p
               key={ e }
               data-testid={ `${index}-${b?.trim()}-horizontal-tag` }

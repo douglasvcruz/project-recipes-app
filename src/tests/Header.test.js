@@ -18,7 +18,7 @@ describe('testando o componente Header', () => {
     const title = screen.getByTestId('page-title');
     expect(profileTop).toBeInTheDocument();
     expect(searchTop).toBeInTheDocument();
-    expect(title).toHaveTextContent('Meals');
+    expect(title).toHaveTextContent(/meals/i);
   });
   test('testando o evento click nos inputs', () => {
     const { history } = renderWithRouter(<App />);

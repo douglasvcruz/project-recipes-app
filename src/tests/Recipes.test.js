@@ -60,32 +60,6 @@ describe('Testa a requisição das categorias', () => {
   });
 });
 
-// describe('testa a pesquisa, se renderiza a receita pesquisada', () => {
-//   test.only('testa se a categoria beef é renderizada', async () => {
-//     global.fetch = jest.fn(fetch);
-//     const { history } = renderWithRouter(<App />);
-//     act(() => {
-//       history.push('/meals');
-//     });
-
-//     const lupa = screen.getByTestId('search-top-btn');
-//     expect(lupa).toBeInTheDocument();
-//     const campo = screen.getByTestId('search-input');
-//     expect(campo).toBeInTheDocument();
-//     const radio = screen.getByRole('radio', {
-//       name: /name/i,
-//     });
-//     expect(radio).toBeInTheDocument();
-//     const button = screen.getByTestId('exec-search-btn');
-//     userEvent.click(lupa);
-//     userEvent.type(campo, 'Burek');
-//     userEvent.click(radio);
-//     userEvent.click(button);
-//     expect(history.location.pathname).toBe('/meals/53060');
-//     expect(button).toBeInTheDocument();
-//   });
-// });
-
 describe('testa a clicar na primeira imagem, vai pra receita detalhada', () => {
   test('testa clicar em corba, vai para os detalhes dela', async () => {
     global.fetch = jest.fn(fetch);

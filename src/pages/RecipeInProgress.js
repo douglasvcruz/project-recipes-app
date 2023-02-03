@@ -30,7 +30,7 @@ function RecipeInProgress() {
       url = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
     }
     const api = await makeFetch(url);
-    setStartApi(test ? api.meals : api.drinks);
+    setStartApi(test ? api?.meals : api?.drinks);
   };
 
   const localFavorites = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
@@ -116,7 +116,7 @@ function RecipeInProgress() {
         category: strCategory,
         image: strMealThumb,
         type: 'meal',
-        tags: ((strTags !== null ? strTags : '').split(',')),
+        tags: ((strTags !== null ? strTags : '')?.split(',')),
         alcoholicOrNot: '',
         doneDate: new Date(),
       }]));
@@ -140,10 +140,10 @@ function RecipeInProgress() {
 
   const saveIngredients = () => {
     const obj = {
-      ingredient: Object.entries(startApi[0] || [])
+      ingredient: Object.entries((startApi ? startApi[0] : []) || [])
         .filter((a) => a[0].includes('strIngredient')
         && a[1] !== null && a[1].length !== 0).map((b) => b[1]),
-      measure: Object.entries(startApi[0] || [])
+      measure: Object.entries((startApi ? startApi[0] : []) || [])
         .filter((a) => a[0].includes('strMeasure')
       && a[1] !== ' ' && a[1] !== null).map((b) => b[1]),
     };
@@ -190,7 +190,7 @@ function RecipeInProgress() {
             {`${d} ${ingredients.measure[index]}`}
           </label>
         </li>)) }
-      { startApi.map((e, i) => (
+      { startApi?.map((e, i) => (
         <div key={ i }>
           <p>{copia.copied}</p>
           <h1 data-testid="recipe-title">{ test ? e.strMeal : e.strDrink }</h1>
