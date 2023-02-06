@@ -3,8 +3,8 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import RecipeFavoriteCard from '../components/RecipeFavoriteCard';
 import FilterContext from '../context/FilterContext';
-import drinkIcon from '../images/drinkIcon.svg';
-import mealIcon from '../images/mealIcon.svg';
+import drinkIcon from '../images/allDrink.svg';
+import mealIcon from '../images/allMeal.svg';
 import fastFood from '../images/fastFood.svg';
 import '../styles/Favorites.css';
 

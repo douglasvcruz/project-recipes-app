@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import AppContext from '../context/AppContext';
+import '../styles/SearchBar.css';
 
 function SearchBar() {
   const {
@@ -13,8 +14,9 @@ function SearchBar() {
   const { location: { pathname } } = useHistory();
 
   return (
-    <div>
+    <section className="section-search">
       <input
+        className="search-input"
         value={ searchHandleChange.value }
         onChange={ searchHandleChange.onChange }
         placeholder="Search"
@@ -23,50 +25,53 @@ function SearchBar() {
         data-testid="search-input"
       />
       <br />
-      <label htmlFor="Ingredient">
-        <input
-          id="Ingredient"
-          type="radio"
-          name="option"
-          value="ingredient"
-          checked={ ingredients.value === 'ingredient' }
-          onChange={ ingredients.onChange }
-          data-testid="ingredient-search-radio"
-        />
-        Ingredient
-      </label>
-      <label htmlFor="name">
-        <input
-          id="name"
-          type="radio"
-          name="option"
-          value="name"
-          checked={ ingredients.value === 'name' }
-          onChange={ ingredients.onChange }
-          data-testid="name-search-radio"
-        />
-        Name
-      </label>
-      <label htmlFor="First letter">
-        <input
-          id="First letter"
-          type="radio"
-          name="option"
-          value="letter"
-          checked={ ingredients.value === 'letter' }
-          onChange={ ingredients.onChange }
-          data-testid="first-letter-search-radio"
-        />
-        First letter
-      </label>
-      <br />
-      <button
-        data-testid="exec-search-btn"
-        onClick={ pathname === '/meals' ? (fetchMeals || []) : (fetchDrinks || []) }
-      >
-        Search
-      </button>
-    </div>
+      <div className="div-search">
+        <label htmlFor="Ingredient">
+          <input
+            id="Ingredient"
+            type="radio"
+            name="option"
+            value="ingredient"
+            checked={ ingredients.value === 'ingredient' }
+            onChange={ ingredients.onChange }
+            data-testid="ingredient-search-radio"
+          />
+          <span>Ingredient</span>
+        </label>
+        <label htmlFor="name">
+          <input
+            id="name"
+            type="radio"
+            name="option"
+            value="name"
+            checked={ ingredients.value === 'name' }
+            onChange={ ingredients.onChange }
+            data-testid="name-search-radio"
+          />
+          <span>Name</span>
+        </label>
+        <label htmlFor="First letter">
+          <input
+            id="First letter"
+            type="radio"
+            name="option"
+            value="letter"
+            checked={ ingredients.value === 'letter' }
+            onChange={ ingredients.onChange }
+            data-testid="first-letter-search-radio"
+          />
+          <span className="first-letter">First letter</span>
+        </label>
+        <br />
+        <button
+          className="search-btn"
+          data-testid="exec-search-btn"
+          onClick={ pathname === '/meals' ? (fetchMeals || []) : (fetchDrinks || []) }
+        >
+          Search
+        </button>
+      </div>
+    </section>
   );
 }
 

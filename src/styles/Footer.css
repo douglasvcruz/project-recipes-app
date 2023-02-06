@@ -14,3 +14,16 @@ footer button {
   background-color: #41197f;
   margin: 0 40px;
 }
+
+@media screen and ( min-width : 768px ) {
+
+  footer {
+    align-items: center;
+    height: 85px;
+  }
+
+  footer button {
+    height: 60px;
+    width: 60px;
+  }
+}

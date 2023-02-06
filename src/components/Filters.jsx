@@ -29,7 +29,7 @@ function Filters() {
         className="filter-btn"
         type="button"
         data-testid="All-category-filter"
-        onClick={ ({ target }) => handleApi(target.innerHTML) }
+        onClick={ () => handleApi('All') }
       >
         <img
           src={ path ? allMeal : allDrink }
