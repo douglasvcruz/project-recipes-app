@@ -15,11 +15,13 @@
 }
 
 .profile-icon {
-  margin-left: auto;
+  position: absolute;
+  right: 0;
 }
 
 .search-icon {
-  margin-right: 400px;
+  position: absolute;
+  right: 40px;
 }
 
 header {
@@ -39,6 +41,47 @@ header {
   font-weight: 900;
   letter-spacing: 0.105em;
   line-height: 20px;
+  margin-bottom: 20px;
   text-align: center;
   text-transform: uppercase;
+}
+
+@media screen and ( min-width : 768px ) {
+
+  .title {
+    font-size: xx-large;
+    margin-bottom: 60px;
+  }
+
+  .drink-img {
+    height: 120px;
+    margin-bottom: 30px;
+    margin-top: 70px;
+    width: 120px;
+  }
+
+  .section-header {
+    height: 100px;
+  }
+
+  .icone-recipes {
+    height: 90px;
+    margin-left: 50px;
+    width: 90px;
+  }
+
+  .profile-icon, .search-icon {
+    height: 70px;
+    width: 70px;
+  }
+
+  .search-icon {
+    position: absolute;
+    right: 160px;
+  }
+
+  .profile-icon {
+    position: absolute;
+    right: 40px;
+  }
 }

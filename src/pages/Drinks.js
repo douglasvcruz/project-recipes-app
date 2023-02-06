@@ -8,7 +8,7 @@ function Drinks() {
   return (
     <>
       <Header
-        title="DRINKS"
+        title="Drinks"
       />
       <Filters />
       <Recipes />

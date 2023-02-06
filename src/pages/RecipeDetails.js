@@ -2,9 +2,9 @@ import PropTypes from 'prop-types';
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import AppContext from '../context/AppContext';
-import blackHeart from '../images/blackHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
-import whiteHeart from '../images/whiteHeartIcon.png';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import useCopy from '../hooks/useCopy';
 import '../styles/RecipeDetails.css';
 
@@ -116,23 +116,24 @@ function RecipeDetails({ match }) {
       <p>{copia.copied}</p>
       <header>
         <button
+          className="favorite-recipe-details"
           type="button"
           onClick={ saveLocalStorageFavorites }
         >
           <img
             data-testid="favorite-btn"
-            src={ localFavorites
-              .some((a) => a.id === id) ? blackHeart
-              : whiteHeart }
+            src={ localFavorites.some((a) => a.id === id) ? blackHeartIcon
+              : whiteHeartIcon }
             alt="white heart"
           />
         </button>
         <button
+          className="search-recipe-details"
           type="button"
           data-testid="share-btn"
           onClick={ () => copia.copyButton(match.url) }
         >
-          <img src={ shareIcon } alt="share icon" />
+          <img className="img-search" src={ shareIcon } alt="share icon" />
         </button>
         { (apiDetails || []).map((a, i) => (
           <div
@@ -145,6 +146,18 @@ function RecipeDetails({ match }) {
               alt="Imagem da receita"
               data-testid="recipe-photo"
             />
+            <p
+              className="p-category"
+              data-testid="recipe-category"
+            >
+              {test ? a.strCategory : a.strAlcoholic}
+            </p>
+            <p
+              className="p-title"
+              data-testid="recipe-title"
+            >
+              {test ? a.strMeal : a.strDrink}
+            </p>
           </div>
         ))}
       </header>
@@ -155,39 +168,55 @@ function RecipeDetails({ match }) {
             key={ test ? a.idMeal : a.idDrink }
             data-testid={ `${i}-recipe-card` }
           >
-            { ingredients.ingredient?.map((b, index) => (
-              <li className="ingredients" key={ index }>
-                <p
-                  data-testid={ `${index}-ingredient-name-and-measure` }
-                >
-                  { `${b} ${ingredients.measure[index] || ''}` }
-                </p>
-              </li>
-            )) }
-            <p data-testid="recipe-category">{test ? a.strCategory : a.strAlcoholic}</p>
-            <p data-testid="recipe-title">{test ? a.strMeal : a.strDrink}</p>
+            <p className="p-ingredient">Ingredients</p>
+            <div className="ingredient-box">
+              { ingredients.ingredient?.map((b, index) => (
+                <li className="ingredients" key={ index }>
+                  <p
+                    data-testid={ `${index}-ingredient-name-and-measure` }
+                  >
+                    { `${b} ${ingredients.measure[index] || ''}` }
+                  </p>
+                </li>
+              )) }
+            </div>
+            <p className="p-ingredient">Instructions</p>
+            <p
+              className="instructions"
+              data-testid="instructions"
+            >
+              {a.strInstructions}
+            </p>
+            { test && <p className="p-ingredient">Video</p>}
             { test ? <iframe
+              className="video"
               data-testid="video"
               src={ a.strYoutube.replace('watch?v=', 'embed/') }
               title="YouTube video player"
             /> : ''}
-            <p data-testid="instructions">{a.strInstructions}</p>
-          </button>))}
-        <div className="carousel">
-          { ((test ? drinks : meals) || []).slice(0, six).map((b, index) => (
-            <div
-              className="carousel-div"
-              key={ index }
-              data-testid={ `${index}-recommendation-card` }
-            >
-              <img src={ test ? b.strDrinkThumb : b.strMealThumb } alt="Imagem do Meal" />
-              <p
-                data-testid={ `${index}-recommendation-title` }
+          </button>
+        ))}
+        <div className="arrumando">
+          <p className="p-instruction">Recommended</p>
+          <div className="carousel">
+            { ((test ? drinks : meals) || []).slice(0, six).map((b, index) => (
+              <div
+                className="carousel-div recipe-card"
+                key={ index }
+                data-testid={ `${index}-recommendation-card` }
               >
-                {test ? b.strDrink : b.strMeal}
-              </p>
-            </div>
-          ))}
+                <img
+                  src={ test ? b.strDrinkThumb : b.strMealThumb }
+                  alt="Imagem do Meal"
+                />
+                <p
+                  data-testid={ `${index}-recommendation-title` }
+                >
+                  {test ? b.strDrink : b.strMeal}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
       <button

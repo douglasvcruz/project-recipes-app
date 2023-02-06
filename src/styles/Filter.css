@@ -1,11 +1,11 @@
 .section-filter {
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
-  margin-top: 20px;
+  margin: 30px 0;
 }
 
 .section-filter button {
+  align-items: center;
   background-color: white;
 }
 
@@ -17,12 +17,12 @@
 
 .section-filter p {
   color: #797d86;
-  width: 60px;
+  width: 58px;
 }
 
 .section-filter img {
-  height: 26px;
-  width: 59px;
+  height: 44px;
+  width: 44px;
 }
 
 .filter-text {
@@ -35,3 +35,24 @@
   text-align: center;
 }
 
+@media screen and ( min-width : 768px ) {
+
+  .filter-btn {
+    height: auto;
+  }
+
+  .section-filter img {
+    height: 140px;
+    width: 140px;
+  }
+
+  .section-filter p {
+    color: #797d86;
+    line-height: 25px;
+    width: 160px;
+  }
+
+  .filter-text {
+    font-size: x-large;
+  }
+}
