@@ -10,7 +10,7 @@ import mealIcon from '../images/allMeal.svg';
 import '../styles/DoneRecipes.css';
 
 function DoneRecipes() {
-  const [doneRecipes, setDoneRecipes] = useState('');
+  const [doneRecipes, setDoneRecipes] = useState([]);
 
   const copia = useCopy();
   const history = useHistory();
@@ -67,6 +67,28 @@ function DoneRecipes() {
           <img src={ drinkIcon } alt="fast food" />
           <p className="filter-text">Drinks</p>
         </button>
+      </div>
+      { doneRecipes.map((e, index) => (
+        <div key={ index }>
+          <p>{copia.copied}</p>
+          <button
+            type="button"
+            style={ { border: 'none', backgroundColor: 'inherit' } }
+            onClick={ () => copia.copyButton(e.type === 'meal'
+              ? `/meals/${e.id}`
+              : `/drinks/${e.id}`) }
+          >
+            <img
+              src={ shareIcon }
+              alt="profile-icon"
+              data-testid={ `${index}-horizontal-share-btn` }
+            />
+          </button>
+          <p data-testid={ `${index}-horizontal-done-date` }>{e.doneDate}</p>
+          {e.tags?.map((b) => (
+            <p
+              key={ e }
+              data-testid={ `${index}-${b?.trim()}-horizontal-tag` }
       </section>
       <p>{copia.copied}</p>
       <div className="order-done">

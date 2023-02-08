@@ -27,10 +27,10 @@ function RecipeDetails({ match }) {
 
   useEffect(() => {
     const obj = {
-      ingredient: Object.entries(apiDetails[0] || [])
+      ingredient: Object.entries((apiDetails ? apiDetails[0] : []) || [])
         .filter((a) => a[0].includes('strIngredient')
         && a[1]?.length !== 0 && a[1] !== null).map((b) => b[1]),
-      measure: Object.entries(apiDetails[0] || [])
+      measure: Object.entries((apiDetails ? apiDetails[0] : []) || [])
         .filter((a) => a[0].includes('strMeasure')
       && a[1] !== ' ' && a[1] !== null).map((b) => b[1]),
     };
@@ -42,11 +42,11 @@ function RecipeDetails({ match }) {
     if (pathname === `/meals/${id}`) {
       url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
       const api = await makeFetch(url);
-      setApiDetails(api.meals);
+      setApiDetails(api?.meals);
     } else {
       url = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
       const api = await makeFetch(url);
-      setApiDetails(api.drinks);
+      setApiDetails(api?.drinks);
     }
   };
 

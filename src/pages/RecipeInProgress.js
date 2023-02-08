@@ -31,7 +31,7 @@ export default function RecipeInProgress() {
       url = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
     }
     const api = await makeFetch(url);
-    setStartApi(test ? api.meals : api.drinks);
+    setStartApi(test ? api?.meals : api?.drinks);
   };
 
   const localStorageFavorites = () => {
@@ -111,7 +111,7 @@ export default function RecipeInProgress() {
         category: strCategory,
         image: strMealThumb,
         type: 'meal',
-        tags: ((strTags !== null ? strTags : '').split(',')),
+        tags: ((strTags !== null ? strTags : '')?.split(',')),
         alcoholicOrNot: '',
         doneDate: new Date(),
       }]));
@@ -135,6 +135,11 @@ export default function RecipeInProgress() {
 
   const saveIngredients = () => {
     const obj = {
+      ingredient: Object.entries((startApi ? startApi[0] : []) || [])
+        .filter((a) => a[0].includes('strIngredient')
+        && a[1] !== null && a[1].length !== 0).map((b) => b[1]),
+      measure: Object.entries((startApi ? startApi[0] : []) || [])
+        .filter((a) => a[0].includes('strMeasure')
       ingredient: Object.entries(startApi[0] || []).filter((a) => a[0]
         .includes('strIngredi') && a[1] !== null && a[1].length !== 0).map((b) => b[1]),
       measure: Object.entries(startApi[0] || []).filter((a) => a[0].includes('strMeasure')
@@ -165,6 +170,31 @@ export default function RecipeInProgress() {
 
   return (
     <>
+      {ingredients.ingredient?.map((d, index) => (
+        <li
+          key={ index }
+        >
+          <label
+            htmlFor="checkbox"
+            id={ index }
+            data-testid={ `${index}-ingredient-step` }
+          >
+            <input
+              name="checkbox"
+              onChange={ () => setClassName(index, d) }
+              checked={ (test
+                ? Object.values(local.meals || [])
+                : Object.values(local.drinks || []))
+                .some((a) => a.includes(d)) }
+              type="checkbox"
+            />
+            {`${d} ${ingredients.measure[index]}`}
+          </label>
+        </li>)) }
+      { startApi?.map((e, i) => (
+        <div key={ i }>
+          <p>{copia.copied}</p>
+          <h1 data-testid="recipe-title">{ test ? e.strMeal : e.strDrink }</h1>
       <p>{copia.copied}</p>
       { startApi.map((e, i) => (
         <section key={ i }>
