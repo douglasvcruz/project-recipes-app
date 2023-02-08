@@ -17,7 +17,6 @@
 .section-done-recipes h4 {
   color: #1a1b1c;
   font-size: 12px;
-  font-style: normal;
   font-weight: 700;
   line-height: 12px;
   margin-bottom: 5px;
@@ -28,7 +27,6 @@
 .p-nationality {
   color: #797d86;
   font-size: 9px;
-  font-style: normal;
   font-weight: 300;
   line-height: 9px;
   margin-bottom: 22px;
@@ -39,7 +37,6 @@
 .p-done {
   color: #1a1b1c;
   font-size: 9px;
-  font-style: normal;
   font-weight: 400;
   line-height: 9px;
   margin-left: 20px;
@@ -56,7 +53,6 @@
   color: #797d86;
   display: flex;
   font-size: 9px;
-  font-style: normal;
   font-weight: 400;
   line-height: 9px;
   margin-right: 5px;
@@ -106,6 +102,7 @@
 
   .section-done-recipes {
     margin: 0 20px;
+    margin-bottom: 30px;
     width: 450px;
   }
 

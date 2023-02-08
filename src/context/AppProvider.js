@@ -12,8 +12,8 @@ function AppProvider({ children }) {
   const history = useHistory();
   const ingredients = useHandleChange('');
   const [disabled, setDisabled] = useState(true);
-  const [drinks, setDrinks] = useState('');
-  const [meals, setMeals] = useState('');
+  const [drinks, setDrinks] = useState([]);
+  const [meals, setMeals] = useState([]);
   const searchHandleChange = useHandleChange('');
 
   const { makeFetch } = useFetch();

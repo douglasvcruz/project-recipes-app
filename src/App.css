@@ -1,6 +1,7 @@
 * {
   border: 0;
   color: #41197f;
+  font-family: ' Segoe UI ' , Tahoma , Geneva , Verdana , sans-serif;
   margin: 0;
   padding: 0;
 }
@@ -19,7 +20,6 @@ img {
 }
 
 .login {
-  font-family: ' Segoe UI ' , Tahoma , Geneva , Verdana , sans-serif;
   font-size: 20px;
   font-style: italic;
   font-weight: 500;
@@ -51,9 +51,7 @@ img {
 .email, .password {
   border: 1px solid #41197f;
   border-radius: 5px;
-  font-family: ' Segoe UI ' , Tahoma , Geneva , Verdana , sans-serif;
   font-size: 14px;
-  font-style: normal;
   font-weight: 300;
   height: 40px;
   line-height: 14px;
@@ -66,9 +64,7 @@ img {
   background-color: #fcc436;
   border-radius: 5px;
   color: white;
-  font-family: ' Segoe UI ' , Tahoma , Geneva , Verdana , sans-serif;
   font-size: 14px;
-  font-style: normal;
   font-weight: 700;
   height: 40px;
   letter-spacing: 0.03em;
@@ -90,18 +86,8 @@ img {
   width: 100%;
 }
 
-.rocksGlass {
-  animation: shake 1s infinite ease;
-  max-height: 80vh;
-}
-
 .test {
   text-decoration: line-through solid black;
-}
-
-.favorite-div {
-  height: 100px;
-  width: 100px;
 }
 
 .carousel {
@@ -128,7 +114,6 @@ section {
   bottom: 0;
   color: white;
   font-size: 14px;
-  font-style: normal;
   font-weight: 700;
   height: 40px;
   left: 4%;
@@ -142,44 +127,6 @@ section {
 
 .arrumando {
   margin: auto;
-}
-
-.meals > .logo {
-  animation: shake 1.5s infinite ease;
-  color: aliceblue;
-  font-family: Montserrat , sans-serif;
-  font-size: 3em;
-  font-weight: 900;
-}
-
-@keyframes shake {
-
-  0% {
-    transform: rotate(5deg);
-  }
-
-  50% {
-    transform: rotate(-5deg);
-  }
-
-  100% {
-    transform: rotate(5deg);
-  }
-}
-
-@keyframes clink {
-
-  0% {
-    transform: rotate(-10deg);
-  }
-
-  50% {
-    transform: rotate(20deg);
-  }
-
-  100% {
-    transform: rotate(-10deg);
-  }
 }
 
 @media screen and ( min-width : 380px ) {

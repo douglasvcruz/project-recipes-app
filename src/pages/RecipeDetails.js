@@ -135,7 +135,7 @@ function RecipeDetails({ match }) {
         >
           <img className="img-search" src={ shareIcon } alt="share icon" />
         </button>
-        { (apiDetails || []).map((a, i) => (
+        { apiDetails?.map((a, i) => (
           <div
             className="img-recipe-details"
             key={ i }
@@ -162,7 +162,7 @@ function RecipeDetails({ match }) {
         ))}
       </header>
       <section className="sect">
-        { (apiDetails || []).map((a, i) => (
+        { apiDetails?.map((a, i) => (
           <button
             type="button"
             key={ test ? a.idMeal : a.idDrink }
@@ -199,7 +199,7 @@ function RecipeDetails({ match }) {
         <div className="arrumando">
           <p className="p-instruction">Recommended</p>
           <div className="carousel">
-            { ((test ? drinks : meals) || []).slice(0, six).map((b, index) => (
+            { (test ? drinks : meals).slice(0, six).map((b, index) => (
               <div
                 className="carousel-div recipe-card"
                 key={ index }

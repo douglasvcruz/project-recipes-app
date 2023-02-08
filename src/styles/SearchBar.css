@@ -3,9 +3,7 @@
   border: 1px solid #b1b1b1;
   border-radius: 5px;
   color: #797d86;
-  font-family: ' Segoe UI ' , Tahoma , Geneva , Verdana , sans-serif;
   font-size: 14px;
-  font-style: normal;
   font-weight: 300;
   height: 40px;
   left: 12.5px;
@@ -33,9 +31,7 @@
 
 .div-search span {
   color: white;
-  font-family: ' Segoe UI ' , Tahoma , Geneva , Verdana , sans-serif;
   font-size: 9px;
-  font-style: normal;
   font-weight: 400;
   line-height: 9px;
   padding-top: 2px;
@@ -50,14 +46,11 @@
   background-color: #fcc436;
   border-radius: 5px;
   color: white;
-  font-family: ' Segoe UI ' , Tahoma , Geneva , Verdana , sans-serif;
   font-size: 12px;
-  font-style: normal;
   font-weight: 700;
   height: 25px;
   letter-spacing: 0.03em;
   line-height: 12px;
-  text-align: center;
   text-transform: uppercase;
   width: 208.16px;
 }

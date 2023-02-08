@@ -1,5 +1,6 @@
 * {
   font-family: ' Segoe UI ' , Tahoma , Geneva , Verdana , sans-serif;
+  font-style: normal;
 }
 
 .img-recipe-details {
@@ -21,7 +22,6 @@
 .span-ingredient {
   color: #1a1b1c;
   font-size: 14px;
-  font-style: normal;
   font-weight: 400;
   line-height: 14px;
 }
@@ -32,7 +32,6 @@
   border-radius: 5.351px;
   color: #1a1b1c;
   font-size: 14px;
-  font-style: normal;
   font-weight: 400;
   line-height: 16px;
   margin: auto;
@@ -49,7 +48,6 @@
 .p-ingredient {
   color: #1a1b1c;
   font-size: 20px;
-  font-style: normal;
   font-weight: 700;
   line-height: 20px;
   margin-left: 15px;
@@ -60,7 +58,6 @@
 .p-instruction {
   color: #1a1b1c;
   font-size: 20px;
-  font-style: normal;
   font-weight: 700;
   line-height: 20px;
   margin-left: 30px;
@@ -89,7 +86,6 @@
 .p-category {
   color: #fcc436;
   font-size: 12px;
-  font-style: normal;
   font-weight: 700;
   left: 20px;
   line-height: 12px;
@@ -100,7 +96,6 @@
 .p-title {
   color: white;
   font-size: 20px;
-  font-style: normal;
   font-weight: 900;
   letter-spacing: 0.105em;
   line-height: 20px;
@@ -115,7 +110,6 @@
 .ingredients p {
   color: #1a1b1c;
   font-size: 14px;
-  font-style: normal;
   font-weight: 400;
   line-height: 14px;
 }
