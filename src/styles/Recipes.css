@@ -22,5 +22,35 @@
 .recipe-card p {
   border: 0.517px solid #b1b1b1;
   border-radius: 0 0 5px 5px;
+  color: #1a1b1c;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 12px;
   padding: 6px;
+}
+
+@media screen and ( min-width : 768px ) {
+
+  .recipes {
+    margin-top: 20px;
+  }
+
+  .recipe-card {
+    margin: 0 20px 30px;
+    width: 450px;
+  }
+
+  .recipe-card p {
+    align-items: center;
+    display: flex;
+    font-size: x-large;
+    height: 30px;
+    justify-content: center;
+    padding: auto;
+  }
+
+  .recipe-card img {
+    height: 355.5px;
+  }
 }

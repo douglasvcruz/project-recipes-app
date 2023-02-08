@@ -29,15 +29,6 @@ function Header({ title }) {
           <em>RECIPES</em>
           <strong> app</strong>
         </span>
-        <button
-          type="button"
-          className="profile-icon"
-          data-testid="btn-settings"
-        >
-          <Link to="/profile">
-            <img src={ profileIcon } alt="profile-icon" data-testid="profile-top-btn" />
-          </Link>
-        </button>
         { (pathname.includes('meals') || pathname.includes('drinks'))
        && (
          <button
@@ -52,6 +43,15 @@ function Header({ title }) {
            />
          </button>
        ) }
+        <button
+          type="button"
+          className="profile-icon"
+          data-testid="btn-settings"
+        >
+          <Link to="/profile">
+            <img src={ profileIcon } alt="profile-icon" data-testid="profile-top-btn" />
+          </Link>
+        </button>
       </section>
       {pathname.includes('meals') && <img
         className="drink-img"

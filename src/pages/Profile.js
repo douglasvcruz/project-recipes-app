@@ -5,7 +5,6 @@ import Header from '../components/Header';
 import done from '../images/done.svg';
 import favorite from '../images/favorite.svg';
 import logout from '../images/logout.svg';
-
 import '../styles/Profile.css';
 
 const { email } = JSON.parse(localStorage.getItem('user')) || '';
@@ -46,7 +45,6 @@ function Profile() {
           onClick={ clearLocalStorage }
         >
           <img src={ logout } alt="logout" />
-
           <Link to="/">Logout</Link>
         </button>
       </section>
