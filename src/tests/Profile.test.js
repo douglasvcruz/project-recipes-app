@@ -1,7 +1,7 @@
 import React from 'react';
 import { screen } from '@testing-library/dom';
 import userEvent from '@testing-library/user-event';
-import Profile from '../pages/Profile';
+import Profile from '../pages/Profile/index';
 import { renderWithRouter } from './helpers/renderWith';
 
 describe('testando', () => {

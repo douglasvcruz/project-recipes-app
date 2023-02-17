@@ -7,10 +7,10 @@ import { renderWithRouter } from './helpers/renderWith';
 import App from '../App';
 import AppProvider from '../context/AppProvider';
 import FilterProvider from '../context/FilterProvider';
-import RecipeInProgress from '../pages/RecipeInProgress';
+import RecipeInProgress from '../pages/RecipeInProgress/index';
 import Recipes from '../components/Recipes';
-import RecipeDetails from '../pages/RecipeDetails';
-import DoneRecipes from '../pages/DoneRecipes';
+import RecipeDetails from '../pages/RecipeDetails/index';
+import DoneRecipes from '../pages/DoneRecipes/index';
 
 // afterEach(() => {
 //   jest.clearAllMocks();
